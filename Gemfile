@@ -52,3 +52,17 @@ gem "twitter-bootstrap-rails"
 gem 'slim-rails'
 
 gem 'devise'
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'cucumber-rails'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'email_spec'
+  gem 'timecop'
+  gem 'launchy'
+end
