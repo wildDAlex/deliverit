@@ -55,14 +55,12 @@ gem 'devise'
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'cucumber-rails'
+  gem 'factory_girl_rails'
 end
 
 group :test do
+  gem 'faker'
   gem 'capybara'
-  gem 'database_cleaner'
-  gem 'factory_girl_rails'
-  gem 'email_spec'
-  gem 'timecop'
+  gem 'guard-rspec'
   gem 'launchy'
 end
