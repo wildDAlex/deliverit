@@ -1,19 +1,23 @@
-h1 Listing shares
-
-table
-  tr
-    th Title
-    th
-    th
-    th
-
-  - @shares.each do |share|
+- model_class = Share
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+table class="table table-striped"
+  thead
     tr
-      td = share.title
-      td = link_to 'Show', share
-      td = link_to 'Edit', edit_share_path(share)
-      td = link_to 'Destroy', share, :confirm => 'Are you sure?', :method => :delete
+      th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:title)
+      th= model_class.human_attribute_name(:created_at)
+      th=t '.actions', :default => t("helpers.actions")
+  tbody
+    - @shares.each do |share|
+      tr
+        td= link_to share.id, share_path(share)
+        td= share.title
+        td=l share.created_at
+        td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_share_path(share), :class => 'btn btn-mini'
+          '
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), share_path(share), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
-br
+= link_to t('.new', :default => t("helpers.links.new")), new_share_path, :class => 'btn btn-primary'
 
-= link_to 'New Share', new_share_path

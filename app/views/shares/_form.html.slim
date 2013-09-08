@@ -1,12 +1,9 @@
-= form_for @share do |f|
-  - if @share.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@share.errors.count, "error")} prohibited this share from being saved:"
-      ul
-        - @share.errors.full_messages.each do |message|
-          li = message
-
-  .field
-    = f.label :title
-    = f.text_field :title
-  .actions = f.submit 'Save'
+= form_for @share, :html => { :class => "form-horizontal" } do |f|
+  .control-group
+    = f.label :title, :class => 'control-label'
+    .controls
+      = f.text_field :title, :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    '
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), shares_path, :class => 'btn'
