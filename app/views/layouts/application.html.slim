@@ -39,7 +39,7 @@ html lang="en"
                 li= link_to current_user.email, '#'
                 li= link_to destroy_user_session_path, :method => :delete do
                   span.label.label-important Выход
-                li= image_tag "#{(request.ssl? ? 'https://secure' : 'http://www')}.gravatar.com/avatar/#{Digest::MD5.hexdigest current_user.email}?s=30", :style => 'padding-top:5px'
+                li= image_tag "#{(request.ssl? ? 'https://secure' : 'http://www')}.gravatar.com/avatar/#{Digest::MD5.hexdigest current_user.email}?s=30", :style => 'padding-top:15px'
 
     .container
 
@@ -55,11 +55,6 @@ html lang="en"
               li= link_to "Link 1", "/path1"
               li= link_to "Link 2", "/path2"
               li= link_to "Link 3", "/path3"
-    
+      hr
       footer
-        p = current_user
-        p = link_to "Sign out", destroy_user_session_path, method: :delete
-        p &copy; Company 2013
-
-        p id="notice" notice
-        p id="alert" alert
+        p &copy; Denis Alexandrov 2013
