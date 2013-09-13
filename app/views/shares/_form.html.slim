@@ -1,13 +1,13 @@
 = form_for @share, :html => { :multipart => true, :class => "form-horizontal" } do |f|
   .control-group
-    = f.label :title, :class => 'control-label'
-    .controls
-      = f.text_field :title, :class => 'text_field'
-  .control-group
     = f.label :file, :class => 'control-label'
     .controls
       = f.file_field :file, :class => 'file_field'
-      = image_tag(@share.file_url) if @share.file?
+      = image_tag(@share.file_url, :class => 'img-polaroid') if @share.file?
+  .control-group
+    = f.label :description, :class => 'control-label'
+    .controls
+      = f.text_field :description, :class => 'text_field'
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     '

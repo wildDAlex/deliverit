@@ -1,1 +1,1 @@
-json.extract! @share, :title, :created_at, :updated_at
+json.extract! @share, :description, :created_at, :updated_at
