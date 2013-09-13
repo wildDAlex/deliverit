@@ -19,6 +19,9 @@ Deliverit::Application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
+  # Handling of Unpermitted Keys. If set to :log the unpermitted attributes will be logged, if set to :raise an exception will be raised.
+  config.action_controller.action_on_unpermitted_parameters = :raise
+
   # Raise an error on page load if there are pending migrations
   config.active_record.migration_error = :page_load
 
