@@ -70,6 +70,6 @@ class SharesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def share_params
-      params.require(:share).permit(:title)
+      params.require(:share).permit(:title, :file)
     end
 end

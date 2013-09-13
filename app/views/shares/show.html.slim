@@ -7,9 +7,9 @@ p
   br
   = @share.title
 p
-  strong= model_class.human_attribute_name(:attachment) + ':'
+  strong= model_class.human_attribute_name(:file) + ':'
   br
-  = @share.attachment
+  = @share.file
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), shares_path, :class => 'btn'

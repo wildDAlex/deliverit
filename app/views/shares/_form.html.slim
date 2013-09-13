@@ -4,10 +4,10 @@
     .controls
       = f.text_field :title, :class => 'text_field'
   .control-group
-    = f.label :attachment, :class => 'control-label'
+    = f.label :file, :class => 'control-label'
     .controls
-      = f.file_field :attachment, :class => 'file_field'
-      = image_tag(@share.attachment_url) if @share.attachment?
+      = f.file_field :file, :class => 'file_field'
+      = image_tag(@share.file_url) if @share.file?
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     '

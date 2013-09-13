@@ -65,3 +65,6 @@
 
 # vim artifacts
 **.swp
+
+# file uploads
+/public/uploads/

@@ -6,7 +6,7 @@ table class="table table-striped"
     tr
       th= model_class.human_attribute_name(:id)
       th= model_class.human_attribute_name(:title)
-      th= model_class.human_attribute_name(:attachment)
+      th= model_class.human_attribute_name(:file)
       th= model_class.human_attribute_name(:created_at)
       th=t '.actions', :default => t("helpers.actions")
   tbody
@@ -14,7 +14,7 @@ table class="table table-striped"
       tr
         td= link_to share.id, share_path(share)
         td= share.title
-        td= share.attachment
+        td= share.file
         td=l share.created_at
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_share_path(share), :class => 'btn btn-mini'
