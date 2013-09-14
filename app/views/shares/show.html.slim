@@ -9,7 +9,7 @@ p
 p
   strong= model_class.human_attribute_name(:file) + ':'
   br
-  = @share.file
+  = link_to @share.file, download_share_link(@share)
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), shares_path, :class => 'btn'
