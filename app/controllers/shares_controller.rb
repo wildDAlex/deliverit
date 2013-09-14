@@ -66,10 +66,11 @@ class SharesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_share
       @share = Share.find(params[:id])
+      @share.file
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def share_params
-      params.require(:share).permit(:description, :file)
+      params.require(:share).permit(:original_filename, :file)
     end
 end
