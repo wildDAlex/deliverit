@@ -26,7 +26,7 @@ class FileUploader < CarrierWave::Uploader::Base
     #"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     case Rails.env
       when 'production'
-        Rails.root.join('..', '..', 'shared', 'uploads', "#{model.created_at.year}", "#{model.created_at.month}", "#{model.created_at.day}", "#{model.id}").to_s
+        Rails.root.join('../', '..', 'shared', 'uploads', "#{model.created_at.year}", "#{model.created_at.month}", "#{model.created_at.day}", "#{model.id}").to_s
       when 'development', 'test'
         Rails.root.join('uploads', "#{model.created_at.year}", "#{model.created_at.month}", "#{model.created_at.day}", "#{model.id}").to_s
     end
