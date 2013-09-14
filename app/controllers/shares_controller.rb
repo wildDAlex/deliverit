@@ -26,6 +26,7 @@ class SharesController < ApplicationController
   # POST /shares.json
   def create
     @share = Share.new(share_params)
+    @share.user = current_user
 
     respond_to do |format|
       if @share.save
@@ -80,6 +81,6 @@ class SharesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def share_params
-      params.require(:share).permit(:original_filename, :file)
+      params.require(:share).permit(:file)
     end
 end
