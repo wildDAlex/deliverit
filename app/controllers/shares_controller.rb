@@ -63,19 +63,19 @@ class SharesController < ApplicationController
   end
 
   def download
-    @share = Share.find_by_file(params[:filename]+'.'+params[:extension])
-    send_file @share.file.url, :x_sendfile=>true
+    if user_signed_in?
+      @share = Share.find_by_file(params[:filename]+'.'+params[:extension])
+      send_file @share.file.url, :x_sendfile=>true, disposition: "inline"
+    else
+      redirect_to @root, notice: 'You need to sign in or sign up before continuing.'
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_share
-      if user_signed_in?
-        @share = Share.find(params[:id])
-        @share.file
-      else
-        redirect_to @root, notice: 'You need to sign in or sign up before continuing.'
-      end
+      @share = Share.find(params[:id])
+      @share.file
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
