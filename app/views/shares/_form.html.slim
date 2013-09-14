@@ -3,7 +3,7 @@
     = f.label :file, :class => 'control-label'
     .controls
       = f.file_field :file, :class => 'file_field'
-      = image_tag(URI.unescape(@share.file_url.to_s), :class => 'img-polaroid') if @share.file?
+      = image_tag(@share.file_url, :class => 'img-polaroid') if @share.file?
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     '
