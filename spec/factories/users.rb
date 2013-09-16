@@ -1,7 +1,9 @@
+require 'faker'
 
 FactoryGirl.define do
   factory :valid_user, :class => User do |f|
-    f.email "john@doe.com"
-    f.password "qwertyui"
+    f.email {Faker::Internet.email}
+    f.password {Faker::Internet.password}
+    after(:create) { |user| user.confirm! }
   end
 end
