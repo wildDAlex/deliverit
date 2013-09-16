@@ -81,6 +81,8 @@ class SharesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def share_params
-      params.require(:share).permit(:file) if params[:share]  # if params[:share] fix the case when user click update button without selecting new file
+      if params[:share]   # if params[:share] fix the case when user click update button without selecting new file
+        params.require(:share).permit(:file)
+      end
     end
 end
