@@ -4,6 +4,7 @@ class Share < ActiveRecord::Base
 
   belongs_to :user
 
-  validates :file, :original_filename, :presence => true
+  validates :file, :original_filename, presence: true
+  validates :user, presence: true
 
 end
