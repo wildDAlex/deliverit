@@ -1,4 +1,3 @@
-require 'spec_helper'
 
 FactoryGirl.define do
   factory :share, :class => Share do |f|
