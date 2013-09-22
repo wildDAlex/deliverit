@@ -66,7 +66,7 @@ class SharesController < ApplicationController
   def download
     @share = Share.find_by_file(params[:filename]+'.'+params[:extension])
     if user_signed_in? and @share.user == current_user
-      send_file @share.file.url, :x_sendfile=>true, disposition: "inline"
+      send_file @share.file.url, :x_sendfile => true, disposition: "inline"
     else
       redirect_to root_url, alert: 'Forbidden. You don\'t have permission to access this file.'
     end

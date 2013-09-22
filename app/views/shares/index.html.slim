@@ -4,17 +4,15 @@ div class="page-header"
 table class="table table-striped"
   thead
     tr
-      th= model_class.human_attribute_name(:id)
-      th= model_class.human_attribute_name(:original_filename)
       th= model_class.human_attribute_name(:file)
+      th= model_class.human_attribute_name(:original_filename)
       th= model_class.human_attribute_name(:created_at)
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @shares.each do |share|
       tr
-        td= link_to share.id, share_path(share)
+        td= link_to share.filename, share_path(share)
         td= share.original_filename
-        td= URI.unescape(share.file.to_s)
         td=l share.created_at
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_share_path(share), :class => 'btn btn-mini'

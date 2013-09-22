@@ -1,0 +1,13 @@
+.well.sidebar-nav
+  h3 Upload
+  ul.nav.nav-list
+    li.nav-header Browse file
+    = form_for @share, :html => { :multipart => true } do |f|
+      .control-group
+        .controls
+          = f.file_field :file, :class => 'file_field'
+          = image_tag(@share.file_url, :class => 'img-polaroid') if @share.file?
+      .control-group
+        = f.submit nil, :class => 'btn btn-primary'
+        '
+        = link_to t('.cancel', :default => t("helpers.links.cancel")), shares_path, :class => 'btn'
