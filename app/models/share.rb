@@ -11,4 +11,9 @@ class Share < ActiveRecord::Base
     self.file.to_s.split('/').last
   end
 
+  # Restrict filename to 50 symbols
+  def short_original_filename
+    self.original_filename.length > 50 ? self.original_filename[0...50] + '...' : self.original_filename
+  end
+
 end
