@@ -29,17 +29,16 @@ html lang="en"
             span.icon-bar
             span.icon-bar
           a.brand href="#"Deliverit
-          .container.nav-collapse
-            ul.nav
-              li= link_to "Link 1", "/path1"
-              li= link_to "Link 2", "/path2"
-              li= link_to "Link 3", "/path3"
-            ul.nav.pull-right
-              - if user_signed_in?
-                li= link_to current_user.email, '#'
-                li= link_to destroy_user_session_path, :method => :delete do
-                  span.label.label-important Выход
-                li= image_tag "#{(request.ssl? ? 'https://secure' : 'http://www')}.gravatar.com/avatar/#{Digest::MD5.hexdigest current_user.email}?s=30", :style => 'padding-top:15px'
+          - if user_signed_in?
+            .container.nav-collapse
+              ul.nav
+                li= link_to "Images", "/path1"
+              ul.nav.pull-right
+                - if user_signed_in?
+                  li= link_to current_user.email, '#'
+                  li= link_to destroy_user_session_path, :method => :delete do
+                    span.label.label-important Выход
+                  li= image_tag "#{(request.ssl? ? 'https://secure' : 'http://www')}.gravatar.com/avatar/#{Digest::MD5.hexdigest current_user.email}?s=30", :style => 'padding-top:15px'
 
     .container
 
@@ -49,9 +48,8 @@ html lang="en"
           = yield
         .span4
           = yield :sidebar
-          content_for :sidebar
-            - if user_signed_in?
-              = render "shares/upload"
+
+
       hr
       footer
         p &copy; Denis Alexandrov 2013

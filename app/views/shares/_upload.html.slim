@@ -6,7 +6,6 @@
       .control-group
         .controls
           = f.file_field :file, :class => 'file_field'
-          = image_tag(@share.file_url, :class => 'img-polaroid') if @share.file?
       .control-group
         = f.submit nil, :class => 'btn btn-primary'
         '
