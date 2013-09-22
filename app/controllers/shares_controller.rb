@@ -5,7 +5,7 @@ class SharesController < ApplicationController
   # GET /shares
   # GET /shares.json
   def index
-    @shares = Share.all
+    @shares = Share.order("created_at desc").page params[:page]
   end
 
   # GET /shares/1
