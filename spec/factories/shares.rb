@@ -5,8 +5,8 @@ FactoryGirl.define do
   end
 
 FactoryGirl.define do
-  factory :invalid_share, :class => Share do |f|
-    #without file
+  factory :invalid_share, parent: :contact do |f|
+    f.file nil
   end
 end
 end
