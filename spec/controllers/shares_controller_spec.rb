@@ -51,4 +51,25 @@ describe SharesController do
   #  end
   #end
 
+  describe 'PUT update' do
+    context "valid attributes" do
+      it "located the requested @share" do
+        put :update, id: @share, share: FactoryGirl.attributes_for(:share)
+        assigns(:share).should eq(@share)
+      end
+
+      it "changes @shares's attributes" do
+        put :update, id: @share, share: FactoryGirl.attributes_for(:share, original_filename: "123.jpg")
+        @share.reload
+        @share.original_filename.should eq("123.jpg")
+      end
+
+      it "redirects to the updated share" do
+        put :update, id: @share, share: FactoryGirl.attributes_for(:share)
+        response.should redirect_to @share
+      end
+
+    end
+  end
+
 end
