@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'requests_helper'
 
 describe SharesController do
 
@@ -29,5 +30,25 @@ describe SharesController do
       response.should render_template :show
     end
   end
+
+  describe "create" do
+    context "with valid attributes" do
+      it "creates a new share" do
+        expect{
+          Share.create(file: @share.file, user: @user)
+        }.to change(Share, :count).by(1)
+      end
+    end
+  end
+
+  #describe "POST create" do
+  #  context "with valid attributes" do
+  #    it "creates a new share" do
+  #      expect{
+  #        post :create, share: FactoryGirl.attributes_for(:share)
+  #      }.to change(Share,:count).by(1)
+  #    end
+  #  end
+  #end
 
 end
