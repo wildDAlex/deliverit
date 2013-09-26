@@ -4,6 +4,7 @@ require 'requests_helper'
 describe SharesController do
 
   before :each do
+    DatabaseCleaner.clean
     @user = FactoryGirl.create(:valid_user)
     sign_in @user
     @share = FactoryGirl.create(:share, user: @user)

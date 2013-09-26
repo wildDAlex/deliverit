@@ -4,3 +4,9 @@ def login(user)
   fill_in "user[password]", :with => user.password
   click_button "Sign in"
 end
+
+def within_row(text, &block)
+  within :xpath, "//table//tr[contains(.,\"#{text}\")]" do
+    yield
+  end
+end
