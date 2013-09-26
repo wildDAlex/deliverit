@@ -72,4 +72,17 @@ describe SharesController do
     end
   end
 
+  describe 'DELETE destroy' do
+    it "deletes the share" do
+      expect{
+        delete :destroy, id: @share
+      }.to change(Share, :count).by(-1)
+    end
+
+    it "redirects to shares#index" do
+      delete :destroy, id: @share
+      response.should redirect_to shares_url
+    end
+  end
+
 end
