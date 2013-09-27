@@ -48,6 +48,16 @@ describe Share do
         }.to change(Share, :count).by(-1)
         page.should have_content "Share was successfully deleted"
       end
+
+      it "Shows pagination links" do
+        25.times do
+          FactoryGirl.create(:share, user: @user)
+        end
+        visit shares_path
+        within(:xpath, "//div[@class='pagination pagination-centered']") do
+          page.should have_selector(:xpath, '//ul/li/a')
+        end
+      end
     end
   end
 
