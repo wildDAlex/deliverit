@@ -2,27 +2,27 @@
 div class="page-header"
   h3=t '.title', :default => @share.original_filename
 p
-  strong= model_class.human_attribute_name(:file) + ':'
+  strong= t("attributes.file") + ':'
   br
   = link_to @share.file, download_share_link(@share), target: :_blank
 p
-  strong= model_class.human_attribute_name(:link) + ':'
+  strong= t("links.link") + ':'
   br
   input#focusedInput.span10 type="text" size="500" value=download_share_absolute_link(@share) onclick="this.select();"
 p
-  strong= "Image in [IMG] tag:"
+  strong= t("links.img_tag_link") + ':'
   br
   input#focusedInput.span10 type="text" value="[URL=http://ololo.com/][IMG]#{download_share_absolute_link(@share)}[/IMG][/URL]" onclick="this.select();"
 p
-  strong= "Preview with link to full version:"
+  strong= t("links.preview_with_link") + ':'
   br
   input#focusedInput.span10 type="text" value="[URL=#{download_share_absolute_link(@share)}][IMG]thumb.jpeg[/IMG][/URL]" onclick="this.select();"
 p
-  strong= "HTML inline:"
+  strong= t("links.html_inline_link") + ':'
   br
   input#focusedInput.span10 type="text" value='<a target="_blank" href="http://ololo.ru"><img src="#{download_share_absolute_link(@share)}" border="0"></a>' onclick="this.select();"
 p
-  strong= "HTML inline with link to full version:"
+  strong= t("links.html_inline_with_full_link") + ':'
   br
   input#focusedInput.span10 type="text" value='<a href="#{download_share_absolute_link(@share)}" target="_blank"><img src="http://thumb.jpg" border="0"></a>' onclick="this.select();"
 
