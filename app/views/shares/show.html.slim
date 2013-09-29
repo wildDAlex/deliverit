@@ -1,19 +1,32 @@
 - model_class = Share
 div class="page-header"
-  h1=t '.title', :default => model_class.model_name.human.titleize
-
-p
-  strong= model_class.human_attribute_name(:original_filename) + ':'
-  br
-  = @share.original_filename
+  h3=t '.title', :default => @share.original_filename
 p
   strong= model_class.human_attribute_name(:file) + ':'
   br
   = link_to @share.file, download_share_link(@share), target: :_blank
+p
+  strong= model_class.human_attribute_name(:link) + ':'
+  br
+  input#focusedInput.span10 type="text" size="500" value=download_share_absolute_link(@share) onclick="this.select();"
+p
+  strong= "Image in [IMG] tag:"
+  br
+  input#focusedInput.span10 type="text" size="500" value="[URL=http://ololo.com/][IMG]#{download_share_absolute_link(@share)}[/IMG][/URL]" onclick="this.select();"
+p
+  strong= "Preview with link to full version:"
+  br
+  input#focusedInput.span10 type="text" size="500" value="[URL=#{download_share_absolute_link(@share)}][IMG]thumb.jpeg[/IMG][/URL]" onclick="this.select();"
+p
+  strong= "HTML inline:"
+  br
+  input#focusedInput.span10 type="text" size="500" value='<a target="_blank" href="http://ololo.ru"><img src="#{download_share_absolute_link(@share)}" border="0"></a>' onclick="this.select();"
+p
+  strong= "HTML inline with link to full version:"
+  br
+  input#focusedInput.span10 type="text" size="500" value='<a href="#{download_share_absolute_link(@share)}" target="_blank"><img src="http://thumb.jpg" border="0"></a>' onclick="this.select();"
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), shares_path, :class => 'btn'
-  '
-  = link_to t('.edit', :default => t("helpers.links.edit")), edit_share_path(@share), :class => 'btn'
   '
   = link_to t('.destroy', :default => t("helpers.links.destroy")), share_path(@share), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
