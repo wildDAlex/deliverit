@@ -1,7 +1,10 @@
 # encoding: utf-8
 require 'carrierwave/processing/mime_types'
 
+
 class FileUploader < CarrierWave::Uploader::Base
+
+  include CarrierWave::RMagick
 
   before :cache, :save_original_filename
 
@@ -14,6 +17,14 @@ class FileUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
+
+  version :thumb do
+    process :resize_to_fit => [200,150]
+  end
+
+  version :medium do
+    process :resize_to_fit => [480,480]
+  end
 
   #The following will generate UUID filenames in the format like 1df094eb-c2b1-4689-90dd-790046d38025.jpg
   def filename

@@ -1,6 +1,6 @@
 module SharesHelper
-  def download_share_link(share)
-    "/download/#{share.file.to_s.split('/').last}"
+  def download_share_link(share, version = nil)
+    "/download/#{version}#{"/" if !version.nil?}#{share.file.to_s.split('/').last}"
   end
 
   def download_share_absolute_link(share)

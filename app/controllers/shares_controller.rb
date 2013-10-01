@@ -65,8 +65,18 @@ class SharesController < ApplicationController
 
   def download
     @share = Share.find_by_file(params[:filename]+'.'+params[:extension])
+    if not @share or (not Share::IMAGE_VERSIONS.include?(params[:version]) and not params[:version].nil?)
+      return route_not_found
+    end
     if user_signed_in? and @share.user == current_user
-      send_file @share.file.url, :x_sendfile => true, :filename => @share.original_filename, disposition: "inline"
+      file = if params[:version]
+        @share.file.send(params[:version]) if params[:version] and Share::IMAGE_VERSIONS.include?(params[:version])
+      else
+        @share.file
+      end
+
+
+      send_file file.url, :x_sendfile => true, :filename => @share.original_filename, disposition: "inline"
     else
       redirect_to root_url, alert: 'Forbidden. You don\'t have permission to access this file.'
     end

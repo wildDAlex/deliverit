@@ -1,6 +1,7 @@
 class Share < ActiveRecord::Base
 
   mount_uploader :file, FileUploader
+  IMAGE_VERSIONS = ['thumb', 'medium']  # nil used for original version
 
   belongs_to :user
 

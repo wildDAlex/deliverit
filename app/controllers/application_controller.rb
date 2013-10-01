@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
 
   before_action :set_new_share
 
+  def route_not_found
+    if params[:format] && params[:format] != "html"
+      render :nothing => true, :status => 404
+    else
+      render :template => 'errors/404', :status => 404
+    end
+  end
+
   private
 
     def set_new_share

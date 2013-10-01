@@ -186,6 +186,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    rmagick (2.13.2)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -281,6 +282,7 @@ DEPENDENCIES
   less-rails
   pg
   rails (= 4.0.0)
+  rmagick
   rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
