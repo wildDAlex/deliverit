@@ -18,11 +18,11 @@ class FileUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
-  version :thumb do
+  version :thumb, :if => :image? do
     process :resize_to_fit => [200,150]
   end
 
-  version :medium do
+  version :medium, :if => :image? do
     process :resize_to_fit => [480,480]
   end
 
@@ -89,6 +89,10 @@ class FileUploader < CarrierWave::Uploader::Base
 
   def save_original_filename(file)
     model.original_filename = file.original_filename if file.respond_to?(:original_filename)
+  end
+
+  def image?(new_file)
+    new_file.content_type.start_with? 'image'
   end
 
 end
