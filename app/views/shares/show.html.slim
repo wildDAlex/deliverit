@@ -12,19 +12,19 @@ p
 p
   strong= t("links.img_tag_link") + ':'
   br
-  input#focusedInput.span10 type="text" value="[URL=http://ololo.com/][IMG]#{download_share_absolute_link(@share)}[/IMG][/URL]" onclick="this.select();"
+  input#focusedInput.span10 type="text" value=image_in_img_tag(@share) onclick="this.select();"
 p
   strong= t("links.preview_with_link") + ':'
   br
-  input#focusedInput.span10 type="text" value="[URL=#{download_share_absolute_link(@share)}][IMG]thumb.jpeg[/IMG][/URL]" onclick="this.select();"
+  input#focusedInput.span10 type="text" value=preview_with_link(@share) onclick="this.select();"
 p
   strong= t("links.html_inline_link") + ':'
   br
-  input#focusedInput.span10 type="text" value='<a target="_blank" href="http://ololo.ru"><img src="#{download_share_absolute_link(@share)}" border="0"></a>' onclick="this.select();"
+  input#focusedInput.span10 type="text" value=html_inline_link(@share) onclick="this.select();"
 p
   strong= t("links.html_inline_with_full_link") + ':'
   br
-  input#focusedInput.span10 type="text" value='<a href="#{download_share_absolute_link(@share)}" target="_blank"><img src="http://thumb.jpg" border="0"></a>' onclick="this.select();"
+  input#focusedInput.span10 type="text" value=html_inline_with_full_link(@share) onclick="this.select();"
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), shares_path, :class => 'btn'
