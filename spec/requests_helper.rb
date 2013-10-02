@@ -10,3 +10,7 @@ def within_row(text, &block)
     yield
   end
 end
+
+def download_share_link(share, version = nil)
+  "/download/#{version}#{"/" if !version.nil?}#{share.file.to_s.split('/').last}"
+end

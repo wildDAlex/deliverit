@@ -58,6 +58,18 @@ describe Share do
           page.should have_selector(:xpath, '//ul/li/a')
         end
       end
+
+      it "Show image-share page with links" do
+        visit shares_url
+        attach_file('share[file]', Rails.root.join('public','test_image.jpg'))
+        click_button "Create Share"
+        within(:xpath, "//div[@class='row']/div[@class='span8']") do
+          page.should have_selector(:xpath, '//p/a/img')
+          page.should have_content "Preview with link to full version:"
+          page.should have_content "HTML inline with link to full version:"
+          page.should have_selector(:xpath, "//p/a[@href='#{download_share_link(Share.last)}']")
+        end
+      end
     end
   end
 
