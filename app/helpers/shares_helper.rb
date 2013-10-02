@@ -23,4 +23,17 @@ module SharesHelper
   def html_inline_with_full_link(share)
     "<a href='#{download_share_absolute_link(share)}' target='_blank'><img src='#{download_share_absolute_link(share, :medium)}' border='0'></a>"
   end
+
+  def html_link_to_share(share)
+    if image?(share)
+      link_to (image_tag download_share_link(share, :medium)), download_share_link(share), target: :_blank
+    else
+      link_to @share.short_original_filename, download_share_link(share), target: :_blank
+    end
+  end
+
+  def image?(share)
+    MIME::Types.type_for(share.file.url).first.content_type.start_with? 'image'
+  end
+
 end

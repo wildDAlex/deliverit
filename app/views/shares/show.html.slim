@@ -4,15 +4,12 @@ div class="page-header"
 p
   strong= t("attributes.file") + ':'
   br
-  -if MIME::Types.type_for(@share.file.url).first.content_type.start_with? 'image'
-    = link_to (image_tag download_share_link(@share, :medium)), download_share_link(@share), target: :_blank
-  -else
-    = link_to @share.short_original_filename, download_share_link(@share), target: :_blank
+  = html_link_to_share(@share)
 p
   strong= t("links.link") + ':'
   br
   input#focusedInput.span10 type="text" value=download_share_absolute_link(@share) onclick="this.select();"
--if MIME::Types.type_for(@share.file.url).first.content_type.start_with? 'image'
+-if image?(@share)
   p
     strong= t("links.img_tag_link") + ':'
     br
