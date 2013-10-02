@@ -4,7 +4,10 @@ div class="page-header"
 p
   strong= t("attributes.file") + ':'
   br
-  = link_to (image_tag download_share_link(@share, :medium)), download_share_link(@share), target: :_blank
+  -if MIME::Types.type_for(@share.file.url).first.content_type.start_with? 'image'
+    = link_to (image_tag download_share_link(@share, :medium)), download_share_link(@share), target: :_blank
+  -else
+    = link_to @share.short_original_filename, download_share_link(@share), target: :_blank
 p
   strong= t("links.link") + ':'
   br
