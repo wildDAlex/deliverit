@@ -9,22 +9,23 @@ p
   strong= t("links.link") + ':'
   br
   input#focusedInput.span10 type="text" size="500" value=download_share_absolute_link(@share) onclick="this.select();"
-p
-  strong= t("links.img_tag_link") + ':'
-  br
-  input#focusedInput.span10 type="text" value=image_in_img_tag(@share) onclick="this.select();"
-p
-  strong= t("links.preview_with_link") + ':'
-  br
-  input#focusedInput.span10 type="text" value=preview_with_link(@share) onclick="this.select();"
-p
-  strong= t("links.html_inline_link") + ':'
-  br
-  input#focusedInput.span10 type="text" value=html_inline_link(@share) onclick="this.select();"
-p
-  strong= t("links.html_inline_with_full_link") + ':'
-  br
-  input#focusedInput.span10 type="text" value=html_inline_with_full_link(@share) onclick="this.select();"
+-if MIME::Types.type_for(@share.file.url).first.content_type.start_with? 'image'
+  p
+    strong= t("links.img_tag_link") + ':'
+    br
+    input#focusedInput.span10 type="text" value=image_in_img_tag(@share) onclick="this.select();"
+  p
+    strong= t("links.preview_with_link") + ':'
+    br
+    input#focusedInput.span10 type="text" value=preview_with_link(@share) onclick="this.select();"
+  p
+    strong= t("links.html_inline_link") + ':'
+    br
+    input#focusedInput.span10 type="text" value=html_inline_link(@share) onclick="this.select();"
+  p
+    strong= t("links.html_inline_with_full_link") + ':'
+    br
+    input#focusedInput.span10 type="text" value=html_inline_with_full_link(@share) onclick="this.select();"
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), shares_path, :class => 'btn'
