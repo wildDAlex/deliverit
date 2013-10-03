@@ -25,15 +25,11 @@ module SharesHelper
   end
 
   def html_link_to_share(share)
-    if image?(share)
+    if share.image?
       link_to (image_tag download_share_link(share, :medium)), download_share_link(share), target: :_blank
     else
-      link_to @share.short_original_filename, download_share_link(share), target: :_blank
+      link_to share.short_original_filename, download_share_link(share), target: :_blank
     end
-  end
-
-  def image?(share)
-    MIME::Types.type_for(share.file.url).first.content_type.start_with? 'image'
   end
 
 end

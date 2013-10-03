@@ -9,7 +9,7 @@ p
   strong= t("links.link") + ':'
   br
   input#focusedInput.span10 type="text" value=download_share_absolute_link(@share) onclick="this.select();"
--if image?(@share)
+-if @share.image?
   p
     strong= t("links.img_tag_link") + ':'
     br

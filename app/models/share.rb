@@ -17,4 +17,8 @@ class Share < ActiveRecord::Base
     self.original_filename.length > 50 ? self.original_filename[0...50] + '...' : self.original_filename
   end
 
+  def image?
+    MIME::Types.type_for(self.file.url).first.content_type.start_with? 'image'
+  end
+
 end
