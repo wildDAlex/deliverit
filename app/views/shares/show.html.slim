@@ -27,7 +27,8 @@ p
     br
     input#focusedInput.span10 type="text" value=html_inline_with_full_link(@share) onclick="this.select();"
 
-.form-actions
-  = link_to t('.back', :default => t("helpers.links.back")), shares_path, :class => 'btn'
-  '
-  = link_to t('.destroy', :default => t("helpers.links.destroy")), share_path(@share), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+-if can? :manage, Share
+  .form-actions
+    = link_to t('.back', :default => t("helpers.links.back")), shares_path, :class => 'btn'
+    '
+    = link_to t('.destroy', :default => t("helpers.links.destroy")), share_path(@share), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

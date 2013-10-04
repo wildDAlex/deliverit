@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
   def admin?      # User with id=1 is Admin. Temp solution.
     self.id == 1 ? true : false
   end
+
+  def registered?
+    self.confirmed_at
+  end
 end

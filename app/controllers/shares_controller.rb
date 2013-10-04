@@ -1,12 +1,12 @@
 class SharesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:show, :download]
   before_action :set_share, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
   # GET /shares
   # GET /shares.json
   def index
-    @shares = Share.order("created_at desc").page params[:page]
+    @shares = Share.where(user_id: current_user.id).order("created_at desc").page params[:page]
   end
 
   # GET /shares/1
@@ -69,7 +69,7 @@ class SharesController < ApplicationController
     if not @share or (not Share::IMAGE_VERSIONS.include?(params[:version]) and not params[:version].nil?)
       return route_not_found
     end
-    if (user_signed_in? and @share.user == current_user) or (current_user.admin?)
+    if (@share.user == current_user) or (signed_in? and current_user.admin?) or @share.public
       file = if params[:version]
         @share.file.send(params[:version]) if params[:version] and Share::IMAGE_VERSIONS.include?(params[:version])
       else
