@@ -86,4 +86,15 @@ describe SharesController do
     end
   end
 
+  describe 'Access to anothers share' do
+    it "doesn't allowing" do
+      sign_out @user
+      @user2 = FactoryGirl.create(:valid_user)
+      sign_in @user2
+      get :show, id: @share
+      response.should have_content 'Forbidden. You don\'t have permission to access this.'
+    end
+
+  end
+
 end
