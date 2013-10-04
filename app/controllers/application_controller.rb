@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
   before_action :set_new_share
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
+
   def route_not_found
     if params[:format] && params[:format] != "html"
       render :nothing => true, :status => 404

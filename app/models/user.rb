@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
 
   has_many :shares
+
+  def admin?      # User with id=1 is Admin. Temp solution.
+    self.id == 1 ? true : false
+  end
 end

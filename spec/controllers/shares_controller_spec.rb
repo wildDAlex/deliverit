@@ -84,15 +84,25 @@ describe SharesController do
       delete :destroy, id: @share
       response.should redirect_to shares_url
     end
+
+    it "allow only own share to be deleted" do
+      sign_out @user
+      @user2 = FactoryGirl.create(:valid_user)
+      sign_in @user2
+      expect{
+        delete :destroy, id: @share
+      }.to change(Share, :count).by(0)
+    end
   end
 
-  describe 'Access to anothers share' do
-    it "doesn't allowing" do
+  describe 'Access to anothers private share' do
+    it "redirects to index" do
       sign_out @user
       @user2 = FactoryGirl.create(:valid_user)
       sign_in @user2
       get :show, id: @share
-      response.should have_content 'Forbidden. You don\'t have permission to access this.'
+      response.should redirect_to root_url
+      #page.should have_content 'You are not authorized to access this page.'
     end
 
   end

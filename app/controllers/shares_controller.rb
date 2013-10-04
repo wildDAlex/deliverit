@@ -1,6 +1,7 @@
 class SharesController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_share, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /shares
   # GET /shares.json
@@ -68,7 +69,7 @@ class SharesController < ApplicationController
     if not @share or (not Share::IMAGE_VERSIONS.include?(params[:version]) and not params[:version].nil?)
       return route_not_found
     end
-    if user_signed_in? and @share.user == current_user
+    if (user_signed_in? and @share.user == current_user) or (current_user.admin?)
       file = if params[:version]
         @share.file.send(params[:version]) if params[:version] and Share::IMAGE_VERSIONS.include?(params[:version])
       else

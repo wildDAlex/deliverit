@@ -53,6 +53,8 @@ gem 'slim-rails'
 
 gem 'devise'
 
+gem "cancan"
+
 gem 'carrierwave'
 
 gem 'kaminari'
