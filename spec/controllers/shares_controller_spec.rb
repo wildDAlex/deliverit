@@ -69,7 +69,6 @@ describe SharesController do
         put :update, id: @share, share: FactoryGirl.attributes_for(:share)
         response.should redirect_to @share
       end
-
     end
   end
 

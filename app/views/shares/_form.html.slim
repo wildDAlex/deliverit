@@ -4,6 +4,10 @@
     .controls
       = f.file_field :file, :class => 'file_field'
       = image_tag(@share.file_url, :class => 'img-polaroid') if @share.file?
+  .control-group
+    = f.label :public, :class => 'control-label'
+    .controls
+      = f.check_box :public, checked: true
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     '
