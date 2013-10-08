@@ -10,6 +10,8 @@ class Share < ActiveRecord::Base
   validates :file, :original_filename, presence: true
   validates :user, presence: true
 
+  #scope :images, where("content_type LIKE 'image%'")
+
   def filename
     self.file.to_s.split('/').last
   end
@@ -21,7 +23,12 @@ class Share < ActiveRecord::Base
 
   def image?
     #MIME::Types.type_for(self.file.url).first.content_type.start_with? 'image'
-    self.content_type.include? 'image'
+    self.content_type.start_with? 'image'
+  end
+
+  # Filter by content type
+  def self.type(shares, type)
+    shares.where("content_type LIKE ?", "%#{type}%")
   end
 
   private

@@ -6,11 +6,7 @@ class SharesController < ApplicationController
   # GET /shares
   # GET /shares.json
   def index
-    @shares = Share.where(user_id: current_user.id).order("created_at desc").page params[:page]
-
-    #if params[:tag]
-    #  @shares = @shares.image?
-    #end
+    @shares = Share.where(user_id: current_user.id).type(@shares, params[:type]).order("created_at desc").page params[:page]
   end
 
   # GET /shares/1
@@ -32,6 +28,12 @@ class SharesController < ApplicationController
   def create
     @share = Share.new(share_params)
     @share.user = current_user
+
+    #5.times do
+    #  @share = Share.new(share_params)
+    #  @share.user = current_user
+    #  @share.save
+    #end
 
     respond_to do |format|
       if @share.save

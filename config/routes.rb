@@ -4,7 +4,7 @@ Deliverit::Application.routes.draw do
 
   root :to => "shares#index"
 
-  #match '/tags/:tag' => 'shares#index', via: [:get]
+  match '/content-type/:type' => 'shares#index', via: [:get]
 
   match '/download/:filename.:extension' => 'shares#download', :as => :share_download, via: [:get]
   match '/download/:version/:filename.:extension' => 'shares#download', :as => :share_version_download, via: [:get]
