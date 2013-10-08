@@ -1,6 +1,8 @@
 class Share < ActiveRecord::Base
 
   mount_uploader :file, FileUploader
+  before_save :update_file_attributes
+
   IMAGE_VERSIONS = ['thumb', 'medium']  # nil used for original version
 
   belongs_to :user
@@ -18,7 +20,17 @@ class Share < ActiveRecord::Base
   end
 
   def image?
-    MIME::Types.type_for(self.file.url).first.content_type.start_with? 'image'
+    #MIME::Types.type_for(self.file.url).first.content_type.start_with? 'image'
+    self.content_type.include? 'image'
+  end
+
+  private
+
+  def update_file_attributes
+    if file.present? && file_changed?
+      self.content_type = file.file.content_type
+      self.file_size = file.file.size
+    end
   end
 
 end

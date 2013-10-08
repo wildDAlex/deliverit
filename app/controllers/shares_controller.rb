@@ -7,6 +7,10 @@ class SharesController < ApplicationController
   # GET /shares.json
   def index
     @shares = Share.where(user_id: current_user.id).order("created_at desc").page params[:page]
+
+    #if params[:tag]
+    #  @shares = @shares.image?
+    #end
   end
 
   # GET /shares/1
