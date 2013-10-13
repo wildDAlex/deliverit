@@ -37,7 +37,7 @@ html lang="en"
                 - if user_signed_in?
                   li= link_to current_user.email, '#'
                   li= link_to destroy_user_session_path, :method => :delete do
-                    span.label.label-important Выход
+                    span.label.label-important = t('links.sign_out')
                   li= image_tag "#{(request.ssl? ? 'https://secure' : 'http://www')}.gravatar.com/avatar/#{Digest::MD5.hexdigest current_user.email}?s=30", :style => 'padding-top:15px'
 
     .container

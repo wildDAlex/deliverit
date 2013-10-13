@@ -5,6 +5,11 @@ def login(user)
   click_button "Sign in"
 end
 
+def signing_out
+  visit root_path
+  click_on "Sign out"
+end
+
 def within_row(text, &block)
   within :xpath, "//table//tr[contains(.,\"#{text}\")]" do
     yield

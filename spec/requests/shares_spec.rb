@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'requests_helper'
-require "selenium-webdriver"
+#require "selenium-webdriver"
 
 describe Share do
 
@@ -81,6 +81,56 @@ describe Share do
           page.should_not have_content "HTML inline with link to full version:"
           page.should have_selector(:xpath, "//p/a[@href='#{download_share_link(Share.last)}']")
         end
+      end
+    end
+  end
+
+  context "downloading" do
+    before :each do
+      DatabaseCleaner.clean
+      @admin_user = FactoryGirl.create(:valid_user)
+      @user = FactoryGirl.create(:valid_user)
+      @user2 = FactoryGirl.create(:valid_user)
+      @share = FactoryGirl.create(:share, user: @user, public: false)
+      @public_share = FactoryGirl.create(:not_image_share, user: @user, public: true)
+    end
+    describe "public shares" do
+      it "allowed for all" do
+        visit share_url(@public_share)
+        page.should have_content "test_file.txt"
+        visit "/download/#{@public_share.filename}"
+        page.response_headers['Content-Type'].should eq @public_share.content_type
+        login(@user2)
+        visit "/download/#{@public_share.filename}"
+        page.response_headers['Content-Type'].should eq @public_share.content_type
+        signing_out
+        login(@user)
+        visit "/download/#{@public_share.filename}"
+        page.response_headers['Content-Type'].should eq @public_share.content_type
+        signing_out
+      end
+    end
+
+    describe "private shares" do
+      it "allowed for owner" do
+        login(@user)
+        visit share_url(@share)
+        page.should have_content "test_image.jpg"
+        visit "/download/#{@share.filename}"
+        page.response_headers['Content-Type'].should eq @share.content_type
+        signing_out
+      end
+      it "not allowed for another user and guest" do
+        login(@user2)
+        visit share_url(@share)
+        page.should have_content("You are not authorized to access this page.")
+        visit "/download/#{@share.filename}"
+        page.should have_content("Forbidden. You don't have permission to access this file.")
+        signing_out
+        visit share_url(@share)
+        page.should_not have_content "test_image.jpg"
+        visit "/download/#{@share.filename}"
+        page.should have_content("You need to sign in or sign up before continuing.")
       end
     end
   end

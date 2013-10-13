@@ -3,7 +3,7 @@ class Share < ActiveRecord::Base
   mount_uploader :file, FileUploader
   before_save :update_file_attributes
 
-  IMAGE_VERSIONS = ['thumb', 'medium']  # nil used for original version
+  IMAGE_VERSIONS = ['thumb', 'medium']
 
   belongs_to :user
 
