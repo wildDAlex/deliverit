@@ -135,4 +135,27 @@ describe Share do
     end
   end
 
+  context "filter" do
+    before :each do
+      DatabaseCleaner.clean
+      @user = FactoryGirl.create(:valid_user)
+      @img_share = FactoryGirl.create(:share, user: @user)
+      @txt_share = FactoryGirl.create(:not_image_share, user: @user)
+    end
+    describe "by content-type" do
+      it "returns only filtering shares" do
+        login(@user)
+        visit shares_path
+        page.should have_content "test_image.jpg"
+        page.should have_content "test_file.txt"
+        visit "/content-type/image"
+        page.should have_content "test_image.jpg"
+        page.should_not have_content "test_file.txt"
+        visit "/content-type/text"
+        page.should_not have_content "test_image.jpg"
+        page.should have_content "test_file.txt"
+      end
+    end
+  end
+
 end
