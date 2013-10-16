@@ -1,38 +1,11 @@
 = form_for @share, :html => { :multipart => true, :class => "well form-search" } do |f|
-  = f.label :public, :class => 'control-label'
+  = f.label t('labels.make_public'), :class => 'control-label'
   '
   = f.check_box :public, checked: true
   '
   .input-append
     /! Rails.env.test verification need because Capybara tests didn't attach file to unvisible file-field
     = f.file_field :file, :style => "#{"display:none" if not Rails.env.test?}", :onchange => "$('#filename').val($(this).val());"
-    input id="filename" type="text" class="input-xxlarge"  placeholder="Click to browse" onclick="$('input[id=share_file]').click();"
-    a.btn class="btn-primary" onclick="$('#new_share').submit ()" Create Share
+    input id="filename" type="text" class="input-xxlarge"  placeholder=t('views.file_placeholder') onclick="$('input[id=share_file]').click();"
+    a.btn class="btn-primary" onclick="$('#new_share').submit ()" =t('links.upload')
   = f.submit nil, :class => 'btn btn-primary pull-right', :style => "#{"display:none" if not Rails.env.test?}"
-
-
-
--if false
-  .well.sidebar-nav
-    h3 Upload
-    ul.nav.nav-list
-      li.nav-header Browse file
-      = form_for @share, :html => { :multipart => true } do |f|
-        .control-group
-          .controls
-            = f.file_field :file, :class => 'file_field'
-        .control-group
-          = f.label :public, :class => 'control-label'
-          '
-          = f.check_box :public, checked: true
-        .control-group
-          = f.submit nil, :class => 'btn btn-primary pull-right'
-
-
-    = form_for @share, :html => { :multipart => true, :class => "well form-search" } do |f|
-      = f.submit nil, :class => 'btn btn-primary pull-right'
-      = f.check_box :public, checked: true, :class => 'pull-right'
-      '
-      = f.label :public, :class => 'control-label', :class => 'pull-right'
-      '
-      = f.file_field :file, :style => "display:none"

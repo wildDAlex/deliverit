@@ -31,7 +31,7 @@ html lang="en"
           - if user_signed_in?
             .container.nav-collapse
               ul.nav
-                li= link_to "Images", "/content-type/image"
+                li= link_to t('links.images'), "/content-type/image"
               ul.nav.pull-right
                 - if user_signed_in?
                   li= link_to current_user.email, '#'

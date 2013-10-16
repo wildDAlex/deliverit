@@ -6,9 +6,9 @@ div class="page-header"
 table class="table table-striped"
   thead
     tr
-      th= model_class.human_attribute_name(:original_filename)
+      th= t('attributes.original_filename')
       th=
-      th= model_class.human_attribute_name(:created_at)
+      th= t('created_at')
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @shares.each do |share|

@@ -19,10 +19,16 @@ en:
       previous: "←"
       next: "→"
       truncate: "..."
+    file_placeholder: "Click to browse"
 
   attributes:
     file: "File"
     public: "Public"
+    original_filename: "Original filename"
+    created_at: "Created at"
+
+  labels:
+    make_public: "public"
 
   links:
     link: "Link"
@@ -31,3 +37,5 @@ en:
     html_inline_link: "HTML inline"
     html_inline_with_full_link: "HTML inline with link to full version"
     sign_out: "Sign out"
+    upload: "Upload"
+    images: "Images"
