@@ -19,7 +19,6 @@ html lang="en"
     = javascript_include_tag "application", "data-turbolinks-track" => true
 
 
-
   body
     .navbar.navbar
       .navbar-inner
@@ -43,11 +42,14 @@ html lang="en"
     .container
 
       .row
-        .span8
+        .span10
           = bootstrap_flash
-          = yield
-        .span4
+        .span9.offset1
           = yield :sidebar
+        .span12
+          = yield
+          -if false
+            = yield :sidebar
 
 
       hr

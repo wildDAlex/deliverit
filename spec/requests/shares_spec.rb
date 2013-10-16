@@ -63,7 +63,7 @@ describe Share do
         visit shares_url
         attach_file('share[file]', Rails.root.join('public','test_image.jpg'))
         click_button "Create Share"
-        within(:xpath, "//div[@class='row']/div[@class='span8']") do
+        within(:xpath, "//div[@class='row']/div[@class='span12']") do
           page.should have_selector(:xpath, '//p/a/img')
           page.should have_content "Preview with link to full version:"
           page.should have_content "HTML inline with link to full version:"
@@ -75,7 +75,7 @@ describe Share do
         visit shares_url
         attach_file('share[file]', Rails.root.join('public','test_file.txt'))
         click_button "Create Share"
-        within(:xpath, "//div[@class='row']/div[@class='span8']") do
+        within(:xpath, "//div[@class='row']/div[@class='span12']") do
           page.should_not have_selector(:xpath, '//p/a/img')
           page.should_not have_content "Preview with link to full version:"
           page.should_not have_content "HTML inline with link to full version:"
