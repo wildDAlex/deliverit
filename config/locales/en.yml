@@ -40,6 +40,10 @@ en:
     upload: "Upload"
     images: "Images"
 
+  buttons:
+    make_private: "Make private"
+    make_public: "Make public"
+
   messages:
     share_created: "Share was successfully created."
     share_updated: "Share was successfully updated."

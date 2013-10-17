@@ -70,11 +70,6 @@ class SharesController < ApplicationController
     end
   end
 
-  def turn_publicity
-    @share.public = @share.turn_publicity
-    update
-  end
-
   def download
     @share = Share.find_by_file(params[:filename]+'.'+params[:extension])
     if not @share or (not Share::IMAGE_VERSIONS.include?(params[:version]) and not params[:version].nil?)
@@ -86,8 +81,6 @@ class SharesController < ApplicationController
       else
         @share.file
       end
-
-
       send_file file.url, :x_sendfile => true, :filename => @share.original_filename, disposition: "inline"
     else
       redirect_to root_url, alert: t('messages.no_access')
