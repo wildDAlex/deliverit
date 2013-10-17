@@ -22,4 +22,3 @@ table class="table table-striped"
           '
           = link_to t('.destroy', :default => t("helpers.links.destroy")), share_path(share), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 = paginate @shares
-

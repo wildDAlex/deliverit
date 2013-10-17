@@ -37,7 +37,7 @@ class SharesController < ApplicationController
 
     respond_to do |format|
       if @share.save
-        format.html { redirect_to @share, notice: 'Share was successfully created.' }
+        format.html { redirect_to @share, notice: t('messages.share_created') }
         format.json { render action: 'show', status: :created, location: @share }
       else
         format.html { render action: 'new' }
@@ -51,7 +51,7 @@ class SharesController < ApplicationController
   def update
     respond_to do |format|
       if @share.update(share_params)
-        format.html { redirect_to @share, notice: 'Share was successfully updated.' }
+        format.html { redirect_to @share, notice: t('messages.share_updated') }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -65,7 +65,7 @@ class SharesController < ApplicationController
   def destroy
     @share.destroy
     respond_to do |format|
-      format.html { redirect_to shares_url, alert: 'Share was successfully deleted.' }
+      format.html { redirect_to shares_url, alert: t('messages.share_deleted') }
       format.json { head :no_content }
     end
   end
@@ -85,7 +85,7 @@ class SharesController < ApplicationController
 
       send_file file.url, :x_sendfile => true, :filename => @share.original_filename, disposition: "inline"
     else
-      redirect_to root_url, alert: 'Forbidden. You don\'t have permission to access this file.'
+      redirect_to root_url, alert: t('messages.no_access')
     end
   end
 

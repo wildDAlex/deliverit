@@ -39,3 +39,9 @@ en:
     sign_out: "Sign out"
     upload: "Upload"
     images: "Images"
+
+  messages:
+    share_created: "Share was successfully created."
+    share_updated: "Share was successfully updated."
+    share_deleted: "Share was successfully deleted."
+    no_access: "Forbidden. You don\'t have permission to access this file."
