@@ -31,4 +31,6 @@ p
   .form-actions
     = link_to t('.back', :default => t("helpers.links.back")), shares_path, :class => 'btn'
     '
+    = link_to (@share.public ? t('.make_private') : t('.make_public')), turn_publicity_share_path(@share),  :method => "put", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-inverse'
+    '
     = link_to t('.destroy', :default => t("helpers.links.destroy")), share_path(@share), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

@@ -26,6 +26,10 @@ class Share < ActiveRecord::Base
     self.content_type.start_with? 'image'
   end
 
+  def turn_publicity
+    self.public ? false : true
+  end
+
   # Filter by content type
   def self.type(shares, type)
     shares.where("content_type LIKE ?", "%#{type}%")

@@ -1,6 +1,6 @@
 class SharesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :download]
-  before_action :set_share, only: [:show, :edit, :update, :destroy]
+  before_action :set_share, only: [:show, :edit, :update, :destroy, :turn_publicity]
   load_and_authorize_resource
 
   # GET /shares
@@ -68,6 +68,11 @@ class SharesController < ApplicationController
       format.html { redirect_to shares_url, alert: t('messages.share_deleted') }
       format.json { head :no_content }
     end
+  end
+
+  def turn_publicity
+    @share.public = @share.turn_publicity
+    update
   end
 
   def download

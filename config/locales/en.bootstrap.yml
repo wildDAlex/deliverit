@@ -11,6 +11,8 @@ en:
       destroy: "Delete"
       new: "New"
       edit: "Edit"
+      make_private: "Make private"
+      make_public: "Make public"
     titles:
       edit: "Edit %{model}"
       save: "Save %{model}"

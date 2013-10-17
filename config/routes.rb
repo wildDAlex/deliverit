@@ -1,6 +1,10 @@
 Deliverit::Application.routes.draw do
   devise_for :users
-  resources :shares
+  resources :shares do
+    member do
+      put 'turn_publicity'
+    end
+  end
 
   root :to => "shares#index"
 
