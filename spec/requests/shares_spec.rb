@@ -49,6 +49,22 @@ describe Share do
         page.should have_content "Share was successfully deleted"
       end
 
+      it "make shares public and private" do
+        @share = FactoryGirl.create(:share, user: @user, public: false)
+        visit share_path(@share)
+        click_link "Make public"
+        page.should have_content "Share was successfully updated."
+        signing_out
+        visit "/download/#{@share.filename}"
+        page.response_headers['Content-Type'].should eq @share.content_type
+        login(@user)
+        visit share_path(@share)
+        click_link 'Make private'
+        signing_out
+        visit "/download/#{@share.filename}"
+        page.should have_content("You need to sign in or sign up before continuing.")
+      end
+
       it "Shows pagination links" do
         25.times do
           FactoryGirl.create(:share, user: @user)
