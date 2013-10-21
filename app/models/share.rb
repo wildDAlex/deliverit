@@ -17,8 +17,8 @@ class Share < ActiveRecord::Base
   end
 
   # Restrict filename to 50 symbols
-  def short_original_filename
-    self.original_filename.length > 50 ? self.original_filename[0...50] + '...' : self.original_filename
+  def short_original_filename(size=50)
+    self.original_filename.length > size ? self.original_filename[0...size] + '...' : self.original_filename
   end
 
   def image?

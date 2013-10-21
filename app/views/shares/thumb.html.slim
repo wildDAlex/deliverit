@@ -1,0 +1,18 @@
+- model_class = Share
+- content_for :sidebar
+  = render "shares/upload" if user_signed_in?
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+.container
+  - @shares.each do |share|
+    .col-lg-2.portfolio-item
+      a href=share_path(share)
+        img.img-responsive src=download_share_link(share, :thumb)
+      = share.short_original_filename(25)
+      '
+      = share.file_size/1024
+      = t('views.kilobyte')
+      = ' * '
+      =l share.created_at, :format => :short
+
+= paginate @shares

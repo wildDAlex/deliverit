@@ -6,7 +6,12 @@ class SharesController < ApplicationController
   # GET /shares
   # GET /shares.json
   def index
-    @shares = Share.where(user_id: current_user.id).type(@shares, params[:type]).order("created_at desc").page params[:page]
+    if params[:type] == 'images'
+      @shares = Share.where(user_id: current_user.id).where("content_type LIKE '%image%'").order("created_at desc").page params[:page]
+      render 'thumb.html.slim'
+    else
+      @shares = Share.where(user_id: current_user.id).type(@shares, params[:type]).order("created_at desc").page params[:page]
+    end
   end
 
   # GET /shares/1

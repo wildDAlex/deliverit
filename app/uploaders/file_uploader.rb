@@ -19,7 +19,7 @@ class FileUploader < CarrierWave::Uploader::Base
   # storage :fog
 
   version :thumb, :if => :image? do
-    process :resize_to_fit => [200,150]
+    process :resize_and_pad => [200,150]
   end
 
   version :medium, :if => :image? do

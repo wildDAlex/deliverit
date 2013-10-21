@@ -20,6 +20,7 @@ en:
       next: "→"
       truncate: "..."
     file_placeholder: "Click to browse"
+    kilobyte: "kb"
 
   attributes:
     file: "File"

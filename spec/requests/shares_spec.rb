@@ -66,7 +66,7 @@ describe Share do
       end
 
       it "Shows pagination links" do
-        25.times do
+        26.times do
           FactoryGirl.create(:share, user: @user)
         end
         visit shares_path
