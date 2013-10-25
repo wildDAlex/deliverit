@@ -76,7 +76,6 @@ class SharesController < ApplicationController
   end
 
   def download
-    start_time = Time.now
     @share = Share.find_by_file(params[:filename]+'.'+params[:extension])
     if not @share or (not Share::IMAGE_VERSIONS.include?(params[:version]) and not params[:version].nil?)
       return route_not_found
@@ -91,8 +90,6 @@ class SharesController < ApplicationController
     else
       redirect_to root_url, alert: t('messages.no_access')
     end
-    puts "----------------------------------------"
-    puts Time.now - start_time
   end
 
   private

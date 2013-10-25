@@ -110,6 +110,16 @@ describe Share do
       @share = FactoryGirl.create(:share, user: @user, public: false)
       @public_share = FactoryGirl.create(:not_image_share, user: @user, public: true)
     end
+
+    describe "full version" do
+      it "increases counter" do
+        expect{
+        visit share_url(@public_share)
+        visit "/download/#{@public_share.filename}"
+        }.to change{@public_share.download_count}.from(0).to(1)
+      end
+    end
+
     describe "public shares" do
       it "allowed for all" do
         visit share_url(@public_share)
