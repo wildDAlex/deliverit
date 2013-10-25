@@ -84,6 +84,8 @@ class SharesController < ApplicationController
       file = if params[:version]
         @share.file.send(params[:version]) if params[:version] and Share::IMAGE_VERSIONS.include?(params[:version])
       else
+        @share.download_count += 1  #increase download counter only if downloading full version
+        @share.save
         @share.file
       end
       send_file file.url, :x_sendfile => true, :filename => @share.original_filename, disposition: "inline"
