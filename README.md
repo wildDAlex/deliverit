@@ -32,7 +32,9 @@ when 'production'
 ```
 line in `app/uploaders/file_uploader.rb`. This line collect directory structure relative to the application root folder.
 
-Then `rake:db:migrate`.
+Also you need set up `config.action_mailer.smtp_settings` in `environments/production.rb` file.
+
+And last thing is `rake:db:migrate`.
 
 That's it for quick start! DeliverIt ready to run.
 Note: First registered user(user with id =1 in database) will be admin!
