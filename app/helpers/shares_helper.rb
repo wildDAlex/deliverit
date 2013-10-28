@@ -4,7 +4,7 @@ module SharesHelper
   end
 
   def download_share_absolute_link(share, version = nil)
-    port = request.port and request.port != 80 ? ":"+request.port.to_s : nil
+    port = (request.port and request.port != 80) ? ":"+request.port.to_s : nil
     "http://#{request.host}#{port}/download/#{version}#{"/" if !version.nil?}#{share.file.to_s.split('/').last}"
   end
 
