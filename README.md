@@ -21,16 +21,16 @@ Clone this repository, deploy on your server. That's it.
 
 First of all you must set database credentials in 'config/database.yml'. Feel free to use any of provided by ActiveRecord adapters. I'm using Postgres for example.
 
-DeliverIt based on variety of gems, so for more deep details you may check appropriate documentations.
+Note: DeliverIt based on variety of gems, so for more deep details you may check appropriate documentations.
 
 Next in 'initializers/devise.rb' you must change 'config.mailer_sender' variable to your own email-address.
 
-Next you must change image store to path in your server. It provides by changing
+Next you must change image store to path in your server. Simply change
 ```
 when 'production'
         Rails.root.join('..', '..', 'shared', 'uploads', "#{model.created_at.year}", "#{model.created_at.month}", "#{model.created_at.day}", "#{model.id}").to_s
 ```
-line in 'app/uploaders/file_uploader.rb'. This collect directory structure relative to the application root folder.
+line in 'app/uploaders/file_uploader.rb'. This line collect directory structure relative to the application root folder.
 
 Then 'rake:db:migrate'.
 
@@ -39,12 +39,12 @@ Note: First registered user(user with id =1 in database) will be admin!
 
 ## More configuring
 
-If you don't want to handle multiple users you can disable register abylity by removing ':registerable' argument from 'devise' method in 'app/models/user.rb' (better if you do it after creating the first user).
+If you don't want to handle multiple users you can disable register ability by removing ':registerable' argument from 'devise' method in 'app/models/user.rb' (better if you do it after creating the first user).
 For authentication DeliverIt use Devise gem. See the Devise documentation for more details: https://github.com/plataformatec/devise
 
 Next you may want to change image handling behaviour.
-Most of all that options available in 'app/uploaders/file_uploader.rb'.
-So for default DeliverIt provides creating two image sizes except original size - [medium] and [thumb]. You can add another or change resolution od existing by altering:
+Most of that options available in 'app/uploaders/file_uploader.rb'.
+For default DeliverIt provides creating two image versions except original - [medium] and [thumb]. You can add another or change resolution of existing image versions by altering:
 ```
 version :thumb, :if => :image? do
     process :resize_and_pad => [200,150]
@@ -52,8 +52,8 @@ end
 ```
 Image handling provided by CarrierWave gem, so for more information see - https://github.com/carrierwaveuploader/carrierwave
 
-Also you may want to customize or fully redisign application view.
-DeliverIt based on Twitter boostrap. Fot it available dozens of themes - go ahead and play with it.
+Also you may want to customize or fully redesign application view.
+DeliverIt based on Twitter bootstrap. Fot that css-framework available dozens of themes - go ahead and play with it.
 
 ## Copyright
 
