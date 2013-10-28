@@ -32,7 +32,7 @@ when 'production'
 ```
 line in `app/uploaders/file_uploader.rb`. This line collect directory structure relative to the application root folder.
 
-Also you need set up `config.action_mailer.smtp_settings` in `environments/production.rb` file.
+Also you need to set up `config.action_mailer.smtp_settings` in `environments/production.rb` file.
 
 And last thing is `rake:db:migrate`.
 
