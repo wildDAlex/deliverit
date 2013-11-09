@@ -14,12 +14,16 @@
     margin-bottom: 5px;
     background-color: #FFFFFF;
     margin-left: 5px;
-    font-size: 8px;
+    font-size: 9px;
     text-align: center;
 }
 
 .thumb {
 	margin-bottom: 5px;
+}
+
+.thumb-prop {
+    font-size: 12px;
 }
 
 .col-xs-1,

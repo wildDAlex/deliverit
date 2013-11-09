@@ -55,7 +55,7 @@ end
 Image handling provided by CarrierWave gem, so for more information see - https://github.com/carrierwaveuploader/carrierwave
 
 Also you may want to customize or fully redesign application view.
-DeliverIt based on Twitter bootstrap. Fot that css-framework available dozens of themes - go ahead and play with it.
+DeliverIt based on Twitter bootstrap. For that css-framework available dozens of themes - go ahead and play with it.
 
 ## Copyright
 
