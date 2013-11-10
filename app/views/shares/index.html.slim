@@ -14,7 +14,7 @@ table class="table table-striped"
   tbody
     - @shares.each do |share|
       tr
-        td= image_tag share.file_icon
+        td class="#{share.file_icon_class} filetype"
         td= link_to share.short_original_filename, share_path(share), title: share.original_filename
         td
           span class="label label-success" = t('attributes.public').downcase if share.public
