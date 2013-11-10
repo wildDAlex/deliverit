@@ -92,7 +92,7 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def image?(new_file)
-    new_file.content_type.start_with? 'image'
+    new_file.content_type.start_with? 'image' and not new_file.content_type.end_with? 'tiff'   #Tiff files are not processible
   end
 
 end

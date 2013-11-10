@@ -23,7 +23,7 @@ class Share < ActiveRecord::Base
 
   def image?
     #MIME::Types.type_for(self.file.url).first.content_type.start_with? 'image'
-    self.content_type.start_with? 'image'
+    self.content_type.start_with? 'image' and not self.content_type.end_with? 'tiff'   #Tiff files are not processible
   end
 
   def turn_publicity
