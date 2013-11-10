@@ -1,11 +1,12 @@
 - model_class = Share
 - content_for :sidebar
   = render "shares/upload" if user_signed_in?
-div class="page-header"
-  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+/div class="page-header"
+/  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
 table class="table table-striped"
   thead
     tr
+      th
       th= t('attributes.original_filename')
       th=
       th= t('created_at')
@@ -13,6 +14,7 @@ table class="table table-striped"
   tbody
     - @shares.each do |share|
       tr
+        td= image_tag share.file_icon
         td= link_to share.short_original_filename, share_path(share), title: share.original_filename
         td
           span class="label label-success" = t('attributes.public').downcase if share.public

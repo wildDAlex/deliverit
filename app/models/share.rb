@@ -35,6 +35,23 @@ class Share < ActiveRecord::Base
     shares.where("content_type LIKE ?", "%#{type}%")
   end
 
+  def file_icon
+    case self.content_type
+      when 'image/png'
+        "/assets/filetypes/32px/png.png"
+      when 'image/jpeg'
+        "/assets/filetypes/32px/jpg.png"
+      when 'image/gif'
+        "/assets/filetypes/32px/gif.png"
+      when 'application/x-rar'
+        "/assets/filetypes/32px/rar.png"
+      when 'audio/aac'
+        "/assets/filetypes/32px/aac.png"
+      else
+        "/assets/filetypes/32px/_blank.png"
+    end
+  end
+
   private
 
   def update_file_attributes
