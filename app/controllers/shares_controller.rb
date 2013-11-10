@@ -88,7 +88,7 @@ class SharesController < ApplicationController
         @share.save
         @share.file
       end
-      send_file file.url, :x_sendfile => true, :filename => @share.original_filename, disposition: "inline"
+      send_file file.url, :x_sendfile => true, :filename => @share.original_filename, type: @share.content_type, disposition: "inline"
     else
       redirect_to root_url, alert: t('messages.no_access')
     end
