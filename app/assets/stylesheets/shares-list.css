@@ -1,0 +1,248 @@
+.filetype {
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.png {
+    background-image:url(png.png);
+}
+
+.jpg {
+    background-image:url(jpg.png);
+}
+
+.gif {
+    background-image:url(gif.png);
+}
+
+.rar {
+    background-image:url(rar.png);
+}
+
+.aac {
+    background-image:url(aac.png);
+}
+
+.ai {
+    background-image:url(ai.png);
+}
+
+.aiff {
+    background-image:url(aiff.png);
+}
+
+.avi {
+    background-image:url(avi.png);
+}
+
+.bmp {
+    background-image:url(bmp.png);
+}
+
+.cpp {
+    background-image:url(cpp.png);
+}
+
+.css {
+    background-image:url(css.png);
+}
+
+.dat {
+    background-image:url(dat.png);
+}
+
+.dmg {
+    background-image:url(dmg.png);
+}
+
+.doc {
+    background-image:url(doc.png);
+}
+
+.dotx {
+    background-image:url(dotx.png);
+}
+
+.dwg {
+    background-image:url(dwg.png);
+}
+
+.dxf {
+    background-image:url(dxf.png);
+}
+
+.eps {
+    background-image:url(eps.png);
+}
+
+.bin {
+    background-image:url(exe.png);
+}
+
+.flv {
+    background-image:url(flv.png);
+}
+
+.gif {
+    background-image:url(gif.png);
+}
+
+.c {
+    background-image:url(c.png);
+}
+
+.h {
+    background-image:url(h.png);
+}
+
+.hpp {
+    background-image:url(hpp.png);
+}
+
+.html {
+    background-image:url(html.png);
+}
+
+.ics {
+    background-image:url(ics.png);
+}
+
+.iso {
+    background-image:url(iso.png);
+}
+
+.java {
+    background-image:url(java.png);
+}
+
+.key {
+    background-image:url(key.png);
+}
+
+.mid {
+    background-image:url(mid.png);
+}
+
+.mp3 {
+    background-image:url(mp3.png);
+}
+
+.mp4 {
+    background-image:url(mp4.png);
+}
+
+.mpga {
+    background-image:url(mp3.png);
+}
+
+.mpg {
+    background-image:url(mpg.png);
+}
+
+.odf {
+    background-image:url(odf.png);
+}
+
+.ods {
+    background-image:url(ods.png);
+}
+
+.odt {
+    background-image:url(odt.png);
+}
+
+.otp {
+    background-image:url(otp.png);
+}
+
+.ots {
+    background-image:url(ots.png);
+}
+
+.ott {
+    background-image:url(ott.png);
+}
+
+.pdf {
+    background-image:url(pdf.png);
+}
+
+.php {
+    background-image:url(php.png);
+}
+
+.ppt {
+    background-image:url(ppt.png);
+}
+
+.psd {
+    background-image:url(psd.png);
+}
+
+.py {
+    background-image:url(py.png);
+}
+
+.qt {
+    background-image:url(qt.png);
+}
+
+.rar {
+    background-image:url(rar.png);
+}
+
+.rb {
+    background-image:url(rb.png);
+}
+
+.rtf {
+    background-image:url(rtf.png);
+}
+
+.sql {
+    background-image:url(sql.png);
+}
+
+.tga {
+    background-image:url(tga.png);
+}
+
+.tgz {
+    background-image:url(tgz.png);
+}
+
+.tiff {
+    background-image:url(tiff.png);
+}
+
+.txt {
+    background-image:url(txt.png);
+}
+
+.wav {
+    background-image:url(wav.png);
+}
+
+.xls {
+    background-image:url(xls.png);
+}
+
+.xlsx {
+    background-image:url(xlsx.png);
+}
+
+.xml {
+    background-image:url(xml.png);
+}
+
+.yml {
+    background-image:url(yml.png);
+}
+
+.zip {
+    background-image:url(zip.png);
+}
+
+.file-blank {
+    background-image:url(_blank.png);
+}
