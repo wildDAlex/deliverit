@@ -98,6 +98,13 @@ describe Share do
           page.should have_selector(:xpath, "//p/a[@href='#{download_share_link(Share.last)}']")
         end
       end
+
+      it "Render 404 page when share doesn't exist" do
+        @share = FactoryGirl.create(:share, user: @user)
+        @share.destroy
+        visit share_path @share
+        page.should have_content "404: Page not found."
+      end
     end
   end
 

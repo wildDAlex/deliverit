@@ -1,6 +1,6 @@
 # DeliverIt
 
-DeliverIt is a simple file sharing web application. It mostly oriented in personal use but provides ability to handle multiple users. So if you also want you may use it for all of your family, friends and so on.
+DeliverIt is a simple file sharing web application. It is mostly oriented in personal use but provides ability to handle multiple users. So if you also want you may use it for all of your family, friends and so on.
 
 ## Requirements
 
