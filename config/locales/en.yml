@@ -50,3 +50,4 @@ en:
     share_updated: "Share was successfully updated."
     share_deleted: "Share was successfully deleted."
     no_access: "Forbidden. You don\'t have permission to access this file."
+    m404: "404: Page not found."

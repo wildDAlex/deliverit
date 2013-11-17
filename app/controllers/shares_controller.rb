@@ -26,6 +26,7 @@ class SharesController < ApplicationController
 
   # GET /shares/1/edit
   def edit
+    redirect_to share_path(params[:id])
   end
 
   # POST /shares
@@ -97,8 +98,12 @@ class SharesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_share
-      @share = Share.find(params[:id])
-      @share.file
+      begin
+        @share = Share.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        return route_not_found
+      end
+      #@share.file
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
