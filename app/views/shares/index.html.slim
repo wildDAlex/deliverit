@@ -20,7 +20,15 @@ table class="table table-striped"
           span class="label label-success" = t('attributes.public').downcase if share.public
         td=l share.created_at, :format => :short
         td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_share_path(share), :class => 'btn btn-mini'
+          /= link_to t('.edit', :default => t("helpers.links.edit")), edit_share_path(share), :class => 'btn btn-mini'
+          /'
+          = link_to share_path(share, share: {public: share.turn_publicity}, redirect: :index ),  title: (share.public ? t('buttons.make_private') : t('buttons.make_public')), :method => :put, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } do
+            - if share.public
+              i.icon-remove-circle
+            - else
+              i.icon-share-alt
           '
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), share_path(share), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+          = link_to share_path(share), title: t('.destroy', :default => t("helpers.links.destroy")), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } do
+            i.icon-remove
+
 = paginate @shares

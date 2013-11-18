@@ -57,7 +57,13 @@ class SharesController < ApplicationController
   def update
     respond_to do |format|
       if @share.update(share_params)
-        format.html { redirect_to @share, notice: t('messages.share_updated') }
+        format.html {
+          if params[:redirect] && params[:redirect] == 'index'
+            redirect_to root_path, notice: t('messages.share_updated')
+          else
+            redirect_to @share, notice: t('messages.share_updated')
+          end
+        }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
