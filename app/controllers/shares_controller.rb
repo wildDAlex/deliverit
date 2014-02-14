@@ -89,7 +89,7 @@ class SharesController < ApplicationController
     end
     if (@share.user == current_user) or (signed_in? and current_user.admin?) or @share.public
       file = if params[:version] and @share.image?
-        @share.file.send(params[:version]) if params[:version] and Share::IMAGE_VERSIONS.include?(params[:version])
+        @share.file.send(params[:version]) if Share::IMAGE_VERSIONS.include?(params[:version])
       else
         @share.download_count += 1  #increase download counter only if downloading full version
         @share.save
