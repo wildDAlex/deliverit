@@ -47,21 +47,21 @@ gem 'capistrano', '~> 2.15.5'       #, group: :development
 gem 'unf'
 
 
-gem "therubyracer"
-gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'therubyracer'
+gem 'less-rails' #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 gem 'slim-rails'
 
 gem 'devise'
 
-gem "cancan"
+gem 'cancan'
 
 gem 'carrierwave'
 
 gem 'kaminari'
 
-gem "fog"
+gem 'fog'
 
 gem 'rmagick'
 

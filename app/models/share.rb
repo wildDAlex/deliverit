@@ -10,6 +10,11 @@ class Share < ActiveRecord::Base
   validates :file, :original_filename, presence: true
   validates :user, presence: true
 
+  # Deletes file with share
+  before_destroy do
+    remove_file!
+  end
+
   #scope :images, where("content_type LIKE 'image%'")
 
   def filename
@@ -31,9 +36,9 @@ class Share < ActiveRecord::Base
   end
 
   # Filter by content type
-  def self.type(shares, type)
-    shares.where("content_type LIKE ?", "%#{type}%")
-  end
+  #def self.type(shares, type)
+  #  shares.where("content_type LIKE ?", "%#{type}%")
+  #end
 
   def file_icon_class
     case self.content_type
