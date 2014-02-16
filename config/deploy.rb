@@ -53,11 +53,24 @@ namespace :deploy do
 end
 
 
+namespace :rails do
+  desc "Open the rails console on each of the remote servers"
+  task :console, :roles => :app do
+    execute_interactively "bundle exec rails console #{rails_env}"
+  end
 
+  desc "Open the rails dbconsole on each of the remote servers"
+  task :dbconsole, :roles => :app do
+    execute_interactively "bundle exec rails dbconsole #{rails_env}"
+  end
 
-
-
-
+  def execute_interactively(command)
+    user = fetch(:user)
+    port = 22
+    server ||= find_servers_for_task(current_task).first
+    exec "ssh -l #{user} #{server} -p #{port} -t 'cd #{deploy_to}/current && #{command}'"
+  end
+end
 
 
 
