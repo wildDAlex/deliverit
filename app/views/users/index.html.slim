@@ -14,7 +14,7 @@ table class="table table-striped"
     - @users.each do |user|
       tr
         td= link_to user.id, user_path(user)
-        td= user.email
+        td= link_to user.email, user_path(user)
         td= user.confirmed_at
         td= user.locked_at
         td=l user.created_at
@@ -25,3 +25,4 @@ table class="table table-striped"
 
 = link_to t('.new', :default => t("helpers.links.new")), new_user_path, :class => 'btn btn-primary'
 
+= paginate @users
