@@ -33,11 +33,20 @@ html lang="en"
               ul.nav
                 li= link_to t('links.images'), "/content-type/images"
               ul.nav.pull-right
-                - if user_signed_in?
-                  li= link_to current_user.email, '#'
-                  li= link_to destroy_user_session_path, :method => :delete do
-                    span.label.label-important = t('links.sign_out')
-                  li= image_tag "#{(request.ssl? ? 'https://secure' : 'http://www')}.gravatar.com/avatar/#{Digest::MD5.hexdigest current_user.email}?s=30", :style => 'padding-top:15px'
+                li= link_to current_user.email, edit_user_registration_path
+                li= link_to destroy_user_session_path, :method => :delete do
+                  span.label.label-important = t('links.sign_out')
+                li= image_tag "#{(request.ssl? ? 'https://secure' : 'http://www')}.gravatar.com/avatar/#{Digest::MD5.hexdigest current_user.email}?s=30", :style => 'padding-top:15px'
+              - if current_user.admin?
+                ul.nav.pull-right
+                  li.dropdown
+                    a.dropdown-toggle data-toggle="dropdown" href="#"
+                      | Administration
+                      b.caret
+                    ul.dropdown-menu
+                      li= link_to 'Users', '/admin/users'
+                      li.divider
+                      li= link_to 'Shares', '#'
 
     .container
 

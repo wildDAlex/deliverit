@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
-  #before_filter :authenticate_user!
+  before_filter :authenticate_user!
+  load_and_authorize_resource skip_load_resource only: [:create] # let CanCan to not throwing ForbiddenAttributesError exception
+
   before_action :set_user, only: [:show, :edit, :destroy, :update]
-  #load_and_authorize_resource
+
 
   def index
-    @users = User.all
+    @users = User.all.order(created_at: :desc)
   end
 
   def show
@@ -19,6 +21,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.confirm!
 
     respond_to do |format|
       if @user.save
@@ -31,9 +34,12 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /shares/1
-  # PATCH/PUT /shares/1.json
   def update
+    if params[:user][:password].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: t('messages.user_updated')}
@@ -45,13 +51,15 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /shares/1
-  # DELETE /shares/1.json
   def destroy
-    @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, alert: t('messages.user_deleted') }
-      format.json { head :no_content }
+      if @user.admin?
+        format.html { redirect_to users_path, alert: t('messages.cannot_delete_admin') }
+        format.json { render action: 'show', status: :created, location: @user }
+      elsif @user.destroy
+        format.html { redirect_to users_url, alert: t('messages.user_deleted') }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -67,7 +75,7 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:email)
+    params.require(:user).permit(:email, :password, :password_confirmation, :current_password)
   end
 
 end

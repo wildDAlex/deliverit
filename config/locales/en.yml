@@ -51,3 +51,7 @@ en:
     share_deleted: "Share was successfully deleted."
     no_access: "Forbidden. You don\'t have permission to access this file."
     m404: "404: Page not found."
+    user_created: "Account was successfully created."
+    user_updated: "Account was successfully updated."
+    user_deleted: "Account was successfully deleted."
+    cannot_delete_admin: "You can't delete administrator."
