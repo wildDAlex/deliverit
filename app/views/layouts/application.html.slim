@@ -55,6 +55,5 @@ html lang="en"
           = yield :sidebar
         .span12
           = yield
-      hr
       footer
-        p &copy; Denis Alexandrov 2013
+        p= raw (APP_CONFIG[:copyright] || "&copy; Denis Alexandrov 2013")
