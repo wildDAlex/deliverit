@@ -1,9 +1,7 @@
 - model_class = Share
 div class="page-header"
-  h3=t '.title', :default => @share.original_filename
+  strong==t '.title', :default => @share.original_filename
 p
-  strong= t("attributes.file") + ':'
-  br
   = html_link_to_share(@share)
 p
   strong= t("links.link") + ':'

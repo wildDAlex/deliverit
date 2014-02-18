@@ -23,7 +23,7 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   version :medium, :if => :image? do
-    process :resize_to_fit => [480,480]
+    process :resize_to_limit => [880,880]
   end
 
   #The following will generate UUID filenames in the format like 1df094eb-c2b1-4689-90dd-790046d38025.jpg
