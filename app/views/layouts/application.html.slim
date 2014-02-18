@@ -38,7 +38,7 @@ html lang="en"
                     = current_user.email
                     b.caret
                   ul.dropdown-menu
-                    li= link_to t('links.edit_account_settings'), edit_user_registration_path
+                    li= link_to(t('links.edit_account_settings'), edit_user_path(current_user))
                     - if current_user.admin?
                       li.divider
                       li= link_to t('links.manage_users'), '/admin/users'
@@ -56,4 +56,5 @@ html lang="en"
         .span12
           = yield
       footer
+        hr
         p= raw (APP_CONFIG[:copyright] || "&copy; Denis Alexandrov 2013")

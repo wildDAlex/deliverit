@@ -7,6 +7,7 @@ set :user, "deployer"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
+set :all_app, ["deliverit", "mymovieslist"]
 
 set :scm, "git"
 set :repository, "git@github.com:wildDAlex/#{application}.git"
@@ -52,6 +53,20 @@ namespace :deploy do
     end
   end
   before "deploy", "deploy:check_revision"
+
+  # Restarting all unicorn app
+  after "deploy", "deploy:restart_all_apps"
+
+  task :restart_all_apps, roles: :app, except: {no_release: true} do
+    all_app.each do |app|
+      run "/etc/init.d/unicorn_#{app} stop"
+    end
+    sleep(10)
+    all_app.each do |app|
+      run "/etc/init.d/unicorn_#{app} start"
+    end
+  end
+
 end
 
 

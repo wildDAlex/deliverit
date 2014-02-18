@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   #load_and_authorize_resource skip_load_resource only: [:create] # let CanCan to not throwing ForbiddenAttributesError exception
 
   before_action :set_user, only: [:show, :edit, :destroy, :update]
-  before_action :allow_only_admin  # Not using CanCan in this controller
+  before_action :allow_only_admin, except: [:edit, :update]  # Not using CanCan in this controller
 
   def index
     @users = User.all.order(created_at: :desc).page params[:page]
@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    return route_not_found unless (@user == current_user or current_user.admin?)
     @hide_password = true #disallow change passwords, it's handled by Device
   end
 
@@ -36,6 +37,8 @@ class UsersController < ApplicationController
   end
 
   def update
+    return route_not_found unless (@user == current_user or current_user.admin?)
+
     if params[:user][:password].blank?
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
@@ -43,7 +46,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: t('messages.user_updated')}
+        format.html { redirect_to edit_user_path(@user), notice: t('messages.user_updated')}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
