@@ -1,0 +1,14 @@
+defaults: &DEFAULTS
+  site_title: "Deliverit"
+
+development:
+  <<: *DEFAULTS
+  local_upload_path: /path/to/local/development/uploads
+
+test:
+  <<: *DEFAULTS
+  local_upload_path: /path/to/local/test/uploads
+
+production:
+  <<: *DEFAULTS
+  local_upload_path: /path/to/local/production/uploads

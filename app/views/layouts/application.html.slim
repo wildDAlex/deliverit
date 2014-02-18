@@ -4,7 +4,7 @@ html lang="en"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title= content_for?(:title) ? yield(:title) : "Deliverit"
+    title= content_for?(:title) ? yield(:title) : APP_CONFIG[:site_title]
     = csrf_meta_tags
 
     /! Le HTML5 shim, for IE6-8 support of HTML elements
@@ -27,26 +27,24 @@ html lang="en"
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.brand href="/"Deliverit
+          a.brand href="/" =APP_CONFIG[:site_title]
           - if user_signed_in?
             .container.nav-collapse
               ul.nav
                 li= link_to t('links.images'), "/content-type/images"
               ul.nav.pull-right
-                li= link_to current_user.email, edit_user_registration_path
+                li.dropdown
+                  a.dropdown-toggle data-toggle="dropdown" href="#"
+                    = current_user.email
+                    b.caret
+                  ul.dropdown-menu
+                    li= link_to t('links.edit_account_settings'), edit_user_registration_path
+                    - if current_user.admin?
+                      li.divider
+                      li= link_to t('links.manage_users'), '/admin/users'
                 li= link_to destroy_user_session_path, :method => :delete do
                   span.label.label-important = t('links.sign_out')
                 li= image_tag "#{(request.ssl? ? 'https://secure' : 'http://www')}.gravatar.com/avatar/#{Digest::MD5.hexdigest current_user.email}?s=30", :style => 'padding-top:15px'
-              - if current_user.admin?
-                ul.nav.pull-right
-                  li.dropdown
-                    a.dropdown-toggle data-toggle="dropdown" href="#"
-                      | Administration
-                      b.caret
-                    ul.dropdown-menu
-                      li= link_to 'Users', '/admin/users'
-                      li.divider
-                      li= link_to 'Shares', '#'
 
     .container
 

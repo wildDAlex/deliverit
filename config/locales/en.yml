@@ -40,6 +40,8 @@ en:
     sign_out: "Sign out"
     upload: "Upload"
     images: "Images"
+    edit_account_settings: "Edit account settings"
+    manage_users: "Manage users"
 
   buttons:
     make_private: "Make private"
