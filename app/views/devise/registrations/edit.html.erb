@@ -16,6 +16,11 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
+  <hr>
+  <div><%= f.label :show_links %> <i>(quick links showing on share page)</i><br>
+  <%= f.check_box :show_links %></div>
+  <hr>
+
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></div>
 

@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
-  load_and_authorize_resource skip_load_resource only: [:create] # let CanCan to not throwing ForbiddenAttributesError exception
+  #before_filter :authenticate_user!
+  #load_and_authorize_resource skip_load_resource only: [:create] # let CanCan to not throwing ForbiddenAttributesError exception
 
   before_action :set_user, only: [:show, :edit, :destroy, :update]
-
+  before_action :allow_only_admin  # Not using CanCan in this controller
 
   def index
     @users = User.all.order(created_at: :desc).page params[:page]
@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @hide_password = true #disallow change passwords, it's handled by Device
   end
 
   def create
@@ -73,9 +74,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def allow_only_admin
+    return route_not_found unless (current_user && current_user.admin?)
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :current_password)
+    params.require(:user).permit(:email, :password, :password_confirmation, :current_password, :show_links)
   end
 
 end
