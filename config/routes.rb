@@ -13,6 +13,8 @@ Deliverit::Application.routes.draw do
   match '/download/:filename.:extension' => 'shares#download', :as => :share_download, via: [:get]
   match '/download/:version/:filename.:extension' => 'shares#download', :as => :share_version_download, via: [:get]
 
+  match '/localupload/' => 'shares#upload_from_local', :as => :upload_from_local, via: [:get]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

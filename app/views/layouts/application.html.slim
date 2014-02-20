@@ -39,6 +39,7 @@ html lang="en"
                     b.caret
                   ul.dropdown-menu
                     li= link_to(t('links.edit_account_settings'), edit_user_path(current_user))
+                    li= link_to(t('links.upload_from_local_path'), upload_from_local_path)
                     - if current_user.admin?
                       li.divider
                       li= link_to t('links.manage_users'), '/admin/users'

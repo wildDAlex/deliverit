@@ -106,6 +106,21 @@ class SharesController < ApplicationController
     end
   end
 
+  def upload_from_local
+    if current_user
+      upload_count = current_user.upload_from_local_path
+      respond_to do |format|
+        if upload_count > 0
+          format.html { redirect_to shares_path, notice: t('messages.upload_from_local_success', count: upload_count) }
+        else
+          format.html { redirect_to shares_path, alert: t('messages.no_files_to_upload') }
+        end
+      end
+    else
+      route_not_found
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_share

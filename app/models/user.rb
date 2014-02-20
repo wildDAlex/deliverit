@@ -1,3 +1,4 @@
+# encoding: utf-8
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -14,4 +15,29 @@ class User < ActiveRecord::Base
   def registered?
     self.confirmed_at
   end
+
+  def upload_from_local_path(public: true)
+    upload_path = APP_CONFIG[:local_upload_path]+"/#{self.id}"
+    Dir.chdir(upload_path)
+    count = 0
+    Dir.foreach(upload_path) do |file|
+      if File.ftype(file) == "file"
+        begin
+          share = Share.new
+          share.file = File.open(file)
+          share.user = self
+          share.public = public
+          share.created_at = File.mtime(file)
+          share.save
+        rescue => ex
+          puts "#{ex.class}: #{ex.message}"
+        else
+          File.delete(file)
+        end
+        count += 1
+      end
+    end
+    count
+  end
+
 end

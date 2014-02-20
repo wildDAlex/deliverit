@@ -42,6 +42,7 @@ en:
     images: "Images"
     edit_account_settings: "Edit account settings"
     manage_users: "Manage users"
+    upload_from_local_path: "Upload files from local server path"
 
   buttons:
     make_private: "Make private"
@@ -57,3 +58,5 @@ en:
     user_updated: "Account was successfully updated."
     user_deleted: "Account was successfully deleted."
     cannot_delete_admin: "You can't delete administrator."
+    upload_from_local_success: "%{count} files successfully uploaded."
+    no_files_to_upload: "No files to upload."
