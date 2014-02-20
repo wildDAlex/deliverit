@@ -89,14 +89,18 @@ class SharesController < ApplicationController
       return route_not_found
     end
     if (@share.user == current_user) or (signed_in? and current_user.admin?) or @share.public
-      file = if params[:version] and @share.image?
-        @share.file.send(params[:version]) if Share::IMAGE_VERSIONS.include?(params[:version])
-      else
-        @share.download_count += 1  #increase download counter only if downloading full version
-        @share.save
-        @share.file
+      file = lambda {
+        if params[:version] and @share.image?
+          if Share::IMAGE_VERSIONS_TO_BE_COUNT.include?(params[:version])
+            @share.download_count += 1; @share.save
+          end
+          return @share.file.send(params[:version]) if Share::IMAGE_VERSIONS.include?(params[:version])
+        else
+          @share.download_count += 1; @share.save  #increase download counter only if downloading full version
+          return @share.file
       end
-      send_file file.url, :x_sendfile => true, :filename => @share.original_filename, type: @share.content_type, disposition: "inline"
+      }
+      send_file file.call.url, :x_sendfile => true, :filename => @share.original_filename, type: @share.content_type, disposition: "inline"
     else
       redirect_to root_url, alert: t('messages.no_access')
     end

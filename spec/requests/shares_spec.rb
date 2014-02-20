@@ -122,7 +122,7 @@ describe Share do
       it "don't increase counter" do
         login(@user)
         expect{
-          visit "/download/medium/#{@share.filename}"
+          visit "/download/thumb/#{@share.filename}"
         }.to change{@share.reload.download_count}.by(0)
         signing_out
       end

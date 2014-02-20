@@ -4,6 +4,7 @@ class Share < ActiveRecord::Base
   before_save :update_file_attributes
 
   IMAGE_VERSIONS = ['thumb', 'medium']
+  IMAGE_VERSIONS_TO_BE_COUNT = ['medium'] # except full version that count by default
 
   belongs_to :user
 
