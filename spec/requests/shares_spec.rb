@@ -142,6 +142,8 @@ describe Share do
       it "allowed for all" do
         visit share_url(@public_share)
         page.should have_content "test_file.txt"
+        visit "/f/#{@user.id}/#{@public_share.original_filename}"
+        page.should have_content "test_file.txt"
         visit "/download/#{@public_share.filename}"
         page.response_headers['Content-Type'].should eq @public_share.content_type
         login(@user2)
@@ -160,6 +162,8 @@ describe Share do
         login(@user)
         visit share_url(@share)
         page.should have_content "test_image.jpg"
+        visit "/f/#{@user.id}/#{@share.original_filename}"
+        page.should have_content "test_image.jpg"
         visit "/download/#{@share.filename}"
         page.response_headers['Content-Type'].should eq @share.content_type
         signing_out
@@ -168,10 +172,14 @@ describe Share do
         login(@user2)
         visit share_url(@share)
         page.should have_content("You are not authorized to access this page.")
+        visit "/f/#{@user.id}/#{@share.original_filename}"
+        page.should have_content("Forbidden. You don't have permission to access this file.")
         visit "/download/#{@share.filename}"
         page.should have_content("Forbidden. You don't have permission to access this file.")
         signing_out
         visit share_url(@share)
+        page.should_not have_content "test_image.jpg"
+        visit "/f/#{@user.id}/#{@share.original_filename}"
         page.should_not have_content "test_image.jpg"
         visit "/download/#{@share.filename}"
         page.should have_content("You need to sign in or sign up before continuing.")

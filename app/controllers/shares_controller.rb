@@ -19,6 +19,9 @@ class SharesController < ApplicationController
   # GET /shares/1
   # GET /shares/1.json
   def show
+    unless @share.public? or (signed_in? and current_user == @share.user) or (signed_in? and current_user.admin?)
+      redirect_to root_url, alert: t('messages.no_access')
+    end
   end
 
   # GET /shares/new
