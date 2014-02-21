@@ -1,3 +1,4 @@
+# encoding: utf-8
 class SharesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :download]
   before_action :set_share, only: [:show, :edit, :update, :destroy, :turn_publicity]
@@ -125,7 +126,12 @@ class SharesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_share
       begin
-        @share = Share.find(params[:id])
+        if params[:original_filename] && current_user
+          @share = Share.where(original_filename: (params[:original_filename]+'.'+params[:extension]), user_id: params[:user_id]).first
+          return route_not_found unless @share
+        else
+          @share = Share.find(params[:id])
+        end
       rescue ActiveRecord::RecordNotFound
         return route_not_found
       end

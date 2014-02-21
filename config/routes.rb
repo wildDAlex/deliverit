@@ -1,3 +1,4 @@
+# encoding: utf-8
 Deliverit::Application.routes.draw do
   devise_for :users
   scope "/admin" do
@@ -14,6 +15,7 @@ Deliverit::Application.routes.draw do
   match '/download/:version/:filename.:extension' => 'shares#download', :as => :share_version_download, via: [:get]
 
   match '/localupload/' => 'shares#upload_from_local', :as => :upload_from_local, via: [:get]
+  match '/f/:user_id/:original_filename.:extension' => 'shares#show', constraints: { original_filename: /[^\/]+/ }, :as => :show_by_name, via: [:get]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

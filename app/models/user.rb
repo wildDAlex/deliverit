@@ -29,12 +29,12 @@ class User < ActiveRecord::Base
           share.public = public
           share.created_at = File.mtime(file)
           share.save
+          count += 1
         rescue => ex
           puts "#{ex.class}: #{ex.message}"
         else
           File.delete(file)
         end
-        count += 1
       end
     end
     count
