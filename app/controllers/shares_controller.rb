@@ -126,7 +126,7 @@ class SharesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_share
       begin
-        if params[:original_filename] && current_user
+        if params[:original_filename]
           @share = Share.where(original_filename: (params[:original_filename]+'.'+params[:extension]), user_id: params[:user_id]).first
           return route_not_found unless @share
         else
