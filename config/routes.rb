@@ -15,7 +15,7 @@ Deliverit::Application.routes.draw do
   match '/download/:version/:filename.:extension' => 'shares#download', :as => :share_version_download, via: [:get]
 
   match '/localupload/' => 'shares#upload_from_local', :as => :upload_from_local, via: [:get]
-  get '/f/:user_id/:original_filename.:extension' => 'shares#show', constraints: { original_filename: /[^\/]+/ }
+  get '/f/:user_id/:original_filename.:extension' => 'shares#show_by_name', constraints: { original_filename: /[^\/]+/ }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

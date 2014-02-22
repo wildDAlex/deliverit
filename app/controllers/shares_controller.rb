@@ -1,6 +1,6 @@
 # encoding: utf-8
 class SharesController < ApplicationController
-  before_filter :authenticate_user!, except: [:show, :download]
+  before_filter :authenticate_user!, except: [:show, :show_by_name, :download]
   before_action :set_share, only: [:show, :edit, :update, :destroy, :turn_publicity]
   load_and_authorize_resource
 
@@ -19,8 +19,22 @@ class SharesController < ApplicationController
   # GET /shares/1
   # GET /shares/1.json
   def show
-    unless @share.public? or (signed_in? and current_user == @share.user) or (signed_in? and current_user.admin?)
-      redirect_to root_url, alert: t('messages.no_access')
+  end
+
+  # GET /f/:user_id/:original_filename
+  # Uploads files from local path for given user and show file by name
+  def show_by_name
+    begin
+      @user = User.find(params[:user_id])
+      @user.upload_from_local_path
+      @share = @user.shares.find_by_original_filename(params[:original_filename]+'.'+params[:extension])
+      unless @share.public? or (signed_in? and current_user == @share.user) or (signed_in? and current_user.admin?)
+        redirect_to root_url, alert: t('messages.no_access')
+      else
+        render 'show.html.slim'
+      end
+    rescue ActiveRecord::RecordNotFound
+      return route_not_found
     end
   end
 
@@ -39,12 +53,6 @@ class SharesController < ApplicationController
   def create
     @share = Share.new(share_params)
     @share.user = current_user
-
-    #5.times do
-    #  @share = Share.new(share_params)
-    #  @share.user = current_user
-    #  @share.save
-    #end
 
     respond_to do |format|
       if @share.save
@@ -129,16 +137,10 @@ class SharesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_share
       begin
-        if params[:original_filename]
-          @share = Share.where(original_filename: (params[:original_filename]+'.'+params[:extension]), user_id: params[:user_id]).first
-          return route_not_found unless @share
-        else
-          @share = Share.find(params[:id])
-        end
+        @share = Share.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         return route_not_found
       end
-      #@share.file
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -7,6 +7,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
     cannot :manage, :all
     can :read, Share, public: true
+    can :show_by_name, Share, public: true
     can :download, Share, public: true
 
     if user.admin?
@@ -17,6 +18,7 @@ class Ability
       can :manage, Share, :user_id => user.id
       can :create, Share
       can :read, Share, public: true
+      can :show_by_name, Share, public: true
     end
     #
     # The first argument to `can` is the action you are giving the user 
