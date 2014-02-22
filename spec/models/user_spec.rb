@@ -14,4 +14,9 @@ describe User do
     end
   end
 
+  it "creates user upload directory" do
+    user = FactoryGirl.create(:valid_user)
+    File.directory?(APP_CONFIG[:local_upload_path]+"/#{user.id}").should be_true
+  end
+
 end
