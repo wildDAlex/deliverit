@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
   has_many :shares, dependent: :destroy
 
+  before_save :ensure_authentication_token
+
   after_create :create_user_directory
 
   def admin?      # User with id=1 is Admin. Temp solution.
@@ -43,6 +45,12 @@ class User < ActiveRecord::Base
     count
   end
 
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
+
   private
 
   # Directory used for automated upload from local server path
@@ -50,6 +58,13 @@ class User < ActiveRecord::Base
     if APP_CONFIG[:local_upload_path]
       require 'fileutils'
       FileUtils.mkdir_p(APP_CONFIG[:local_upload_path]+"/#{self.id}")
+    end
+  end
+
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.where(authentication_token: token).first
     end
   end
 

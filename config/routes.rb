@@ -17,6 +17,15 @@ Deliverit::Application.routes.draw do
   match '/localupload/' => 'shares#upload_from_local', :as => :upload_from_local, via: [:get]
   get '/f/:user_id/:original_filename.:extension' => 'shares#show_by_name', constraints: { original_filename: /[^\/]+/ }
 
+
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :shares
+    end
+  end
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
