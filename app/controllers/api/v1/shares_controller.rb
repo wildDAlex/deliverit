@@ -6,7 +6,7 @@ module Api
 
       #protect_from_forgery with: :null_session
 
-      #skip_before_filter :verify_authenticity_token
+      skip_before_filter :verify_authenticity_token, :only => [:create]
 
       before_action :set_share, only: [:show]
 
@@ -16,31 +16,18 @@ module Api
         respond_with Share.all
       end
 
-      # GET /shares/1
-      # GET /shares/1.json
+      # GET /api/v1/1.json
       def show
         respond_with @share
       end
 
-      # POST /shares
-      # POST /shares.json
-      #def create
-      #  @share = Share.new(share_params)
-      #  @share.user = current_user
-      #
-      #  respond_to do |format|
-      #    if @share.save
-      #      format.html { redirect_to @share, notice: t('messages.share_created') }
-      #      format.json { render action: 'show', status: :created, location: @share }
-      #    else
-      #      format.html { render action: 'new' }
-      #      format.json { render json: @share.errors, status: :unprocessable_entity }
-      #    end
-      #  end
-      #end
+      # POST /api/v1/shares.json
+      def create
+        user = {user_id: current_user.id}
+        respond_with Share.create(share_params.merge(user))
+      end
 
-      # PATCH/PUT /shares/1
-      # PATCH/PUT /shares/1.json
+      # PATCH/PUT /api/v1/1.json
       #def update
       #  respond_to do |format|
       #    if @share.update(share_params)
@@ -59,8 +46,7 @@ module Api
       #  end
       #end
 
-      # DELETE /shares/1
-      # DELETE /shares/1.json
+      # DELETE /api/v1/1.json
       def destroy
         respond_with @share.destroy
       end
