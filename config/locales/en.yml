@@ -60,3 +60,9 @@ en:
     cannot_delete_admin: "You can't delete administrator."
     upload_from_local_success: "%{count} files successfully uploaded."
     no_files_to_upload: "No files to upload."
+
+  api:
+    m400: "400: Bad request."
+    m403: "Forbidden. You don\'t have permission to access this file."
+    m404: "404: Not found."
+    m404: "404: Not found."

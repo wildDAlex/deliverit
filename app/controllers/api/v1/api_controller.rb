@@ -14,6 +14,10 @@ module Api
         end
       end
 
+      rescue_from CanCan::AccessDenied do |exception|
+        render text: { status: 403, error: exception.message }.to_json, :status => 403
+      end
+
     end
   end
 end
