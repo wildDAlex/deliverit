@@ -18,6 +18,7 @@ class Share < ActiveRecord::Base
 
   #scope :images, where("content_type LIKE 'image%'")
 
+  # Using in specs only
   def filename
     self.file.to_s.split('/').last
   end

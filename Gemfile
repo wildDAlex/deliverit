@@ -65,6 +65,9 @@ gem 'fog'
 
 gem 'rmagick'
 
+gem 'rabl'
+gem 'oj'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'

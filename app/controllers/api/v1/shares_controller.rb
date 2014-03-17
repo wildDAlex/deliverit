@@ -13,6 +13,7 @@ module Api
       load_and_authorize_resource
 
       respond_to :json
+
       # GET /api/v1/shares.json
       def index
         @shares = Share.where(user_id: current_user.id)
@@ -36,12 +37,11 @@ module Api
 
       # PATCH/PUT /api/v1/1.json
       def update
-        respond_with @share
-        #if share_params && @share.update(share_params)
-        #  respond_with @share.update(share_params)
-        #else
-        #  render json: nil, status: :unprocessable_entity
-        #end
+        if share_params && @share.update(share_params)
+          respond_with @share.update(share_params)
+        else
+          render json: nil, status: :unprocessable_entity
+        end
       end
 
       # DELETE /api/v1/1.json
@@ -65,7 +65,7 @@ module Api
           if params[:share]   # if params[:share] fix the case when user click update button without selecting new file
             params.require(:share).permit(:file, :original_filename, :public)
           end
-        rescue ActionController::UnpermittedParameters => error
+        rescue ActionController::UnpermittedParameters
           nil
         end
 
