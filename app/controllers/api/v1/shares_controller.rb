@@ -10,7 +10,12 @@ module Api
 
       before_action :set_share, only: [:show, :update, :destroy]
 
-      #load_and_authorize_resource
+      # Let CanCan get around strong parameters
+      before_filter do
+        params[:share] = share_params
+      end
+
+      load_and_authorize_resource
 
       respond_to :json
 
