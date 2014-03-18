@@ -33,8 +33,9 @@ module Api
       # POST /api/v1/shares.json
       def create
         user = {user_id: current_user.id}
-        if share_params #&& Share.create(share_params.merge(user))
-          respond_with Share.create(share_params.merge(user))
+        @share = Share.create(share_params.merge(user))
+        if share_params && @share
+          respond_with @share, status: :created, template: "api/v1/shares/show"
         else
           render json: nil, status: :unprocessable_entity
         end
