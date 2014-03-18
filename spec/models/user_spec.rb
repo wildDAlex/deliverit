@@ -19,4 +19,9 @@ describe User do
     File.directory?(APP_CONFIG[:local_upload_path]+"/#{user.id}").should be_true
   end
 
+  it 'creates authentication_token' do
+    user = FactoryGirl.create(:valid_user)
+    user.authentication_token.should_not be_nil
+  end
+
 end
