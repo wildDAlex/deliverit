@@ -66,7 +66,9 @@ gem 'fog'
 gem 'rmagick'
 
 gem 'rabl'
-gem 'oj'
+#gem 'oj'
+
+gem 'thin'
 
 group :development, :test do
   gem 'rspec-rails'

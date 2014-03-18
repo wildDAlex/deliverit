@@ -10,7 +10,7 @@ module Api
 
       before_action :set_share, only: [:show, :update, :destroy]
 
-      load_and_authorize_resource
+      #load_and_authorize_resource
 
       respond_to :json
 
@@ -28,8 +28,8 @@ module Api
       # POST /api/v1/shares.json
       def create
         user = {user_id: current_user.id}
-        if share_params && Share.create(share_params.merge(user))
-          respond_with current_user.shares.last
+        if share_params #&& Share.create(share_params.merge(user))
+          respond_with Share.create(share_params.merge(user))
         else
           render json: nil, status: :unprocessable_entity
         end
@@ -61,14 +61,9 @@ module Api
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def share_params
-        begin
-          if params[:share]   # if params[:share] fix the case when user click update button without selecting new file
-            params.require(:share).permit(:file, :original_filename, :public)
-          end
-        rescue ActionController::UnpermittedParameters
-          nil
+        if params[:share]   # if params[:share] fix the case when user click update button without selecting new file
+          params.require(:share).permit(:file, :original_filename, :public)
         end
-
       end
     end
 
