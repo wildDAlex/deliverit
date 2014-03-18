@@ -5,7 +5,7 @@ module SharesHelper
 
   def download_share_absolute_link(share, version = nil)
     port = (request.port and request.port != 80) ? ":"+request.port.to_s : nil
-    "http://#{request.host}#{port}/download/#{version}#{"/" if !version.nil?}#{share.file.to_s.split("/").last.split("_").last}"
+    "http://#{request.host}#{port}/download/#{version}#{"/" if !version.nil?}#{share.file.path.split("/").last.split("_").last}"
   end
 
   def image_in_img_tag(share)
