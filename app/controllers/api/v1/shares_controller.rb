@@ -11,9 +11,9 @@ module Api
       before_action :set_share, only: [:show, :update, :destroy]
 
       # Let CanCan get around strong parameters
-      #before_action only: [:index] do
-      #  params[:share] = nil
-      #end
+      before_action only: [:create] do
+        params[:share] = share_params
+      end
 
       load_and_authorize_resource
 
