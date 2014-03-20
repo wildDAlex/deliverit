@@ -70,41 +70,15 @@ describe Api do
     end
 
     describe 'POST /api/v1/shares/' do
-      let(:file) {
-        Rack::Test::UploadedFile.new(Rails.root.join('public','test_image.jpg'), 'image/jpeg')
-      }
-      xit 'creates share with correct attributes' do
-        include Rack::Test::Methods
-        #file = ActionDispatch::Http::UploadedFile.new(Rails.root.join('public','test_image.jpg'))
-        #file = Rack::Test::UploadedFile.new(Rails.root.join('public','test_image.jpg'))
-        #require 'base64'
-        #file =  File.open(Rails.root.join('public','test_image.jpg'))
-        #file = Base64.encode64(file.read)
-
-
-        #file = ActionDispatch::Http::UploadedFile.new({
-        #                                                    :filename => 'test_image.jpg',
-        #                                                    :content_type => 'image/jpeg',
-        #                                                    :tempfile => File.new(Rails.root.join('public','test_image.jpg'))
-        #                                                })
-
-
-
-        share_params = { 'share' => { 'public' => true, file: {
-            :content_type => file.content_type,
-            :filename => file.original_filename,
-            :file_data => Base64.encode64(file.read)
-        } } }.to_json
-        #share_params = share_params << {'file' => file}
-        #share_params = { 'share[file]' => file.to_s }.to_json
-        puts "======"
-        #share_params[:file].each do |key,var| puts key end
-        #puts share_params['share']['file']
+      it 'creates share with correct attributes' do
+        file = Rack::Test::UploadedFile.new(Rails.root.join('public','file_via_post.jpg'), 'image/jpeg')
+        share_params = { share: { public: true, file: file } }
         post "/api/v1/shares/", share_params, VALID_REQUEST_HEADERS
 
         expect(response.status).to eq 201
 
-        expect(Share.last.public).to be_false
+        expect(Share.last.public).to be_true
+        expect(Share.last.original_filename).to eq 'file_via_post.jpg'
       end
     end
 

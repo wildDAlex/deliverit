@@ -68,7 +68,7 @@ module Api
       # Never trust parameters from the scary internet, only allow the white list through.
       def share_params
         if params[:share]   # if params[:share] fix the case when user click update button without selecting new file
-          params.require(:share).permit(:file, :original_filename, :public)
+          params.require(:share).permit(:original_filename, :public, :file)
         end
       end
 
