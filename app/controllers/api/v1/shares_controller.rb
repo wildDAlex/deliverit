@@ -67,8 +67,12 @@ module Api
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def share_params
-        if params[:share]   # if params[:share] fix the case when user click update button without selecting new file
-          params.require(:share).permit(:original_filename, :public, :file)
+        begin
+          if params[:share]   # if params[:share] fix the case when user click update button without selecting new file
+            params.require(:share).permit(:original_filename, :public, :file)
+          end
+        rescue ActionController::UnpermittedParameters => e # only if action_on_unpermitted_parameters = :raise
+          render text: { status: 400, error: e.message }.to_json, :status => 400
         end
       end
 

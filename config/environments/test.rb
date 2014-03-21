@@ -23,6 +23,9 @@ Deliverit::Application.configure do
   # Raise exceptions instead of rendering exception templates.
   config.action_dispatch.show_exceptions = false
 
+  # Handling of Unpermitted Keys. If set to :log the unpermitted attributes will be logged, if set to :raise an exception will be raised.
+  #config.action_controller.action_on_unpermitted_parameters = :log
+
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
 
