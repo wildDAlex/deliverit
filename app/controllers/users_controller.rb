@@ -67,6 +67,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def generate_token
+    if current_user
+      current_user.ensure_authentication_token(regenerate: true)
+      current_user.save
+      respond_to do |format|
+        format.html { redirect_to edit_user_path(current_user), notice: t('messages.authentication_token_updated') }
+      end
+    else
+      route_not_found
+    end
+  end
+
   private
   # Use callbacks to user common setup or constraints between actions.
   def set_user

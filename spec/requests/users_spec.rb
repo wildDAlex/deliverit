@@ -76,4 +76,13 @@ describe "Managing users" do
     page.should have_content "404: Page not found."
   end
 
+  it 'allow users regenerate authentication token' do
+    signing_out
+    login(@user)
+    old_token = @user.authentication_token
+    visit edit_user_path(@user)
+    click_link 'Regenerate token'
+    expect(User.find(@user).authentication_token).to_not eq(old_token)
+  end
+
 end

@@ -27,6 +27,7 @@ en:
     public: "Public"
     original_filename: "Original filename"
     created_at: "Created at"
+    authentication_token: "Authentication Token"
 
   labels:
     make_public: "public"
@@ -47,6 +48,7 @@ en:
   buttons:
     make_private: "Make private"
     make_public: "Make public"
+    generate_token: "Regenerate token"
 
   messages:
     share_created: "Share was successfully created."
@@ -60,6 +62,7 @@ en:
     cannot_delete_admin: "You can't delete administrator."
     upload_from_local_success: "%{count} files successfully uploaded."
     no_files_to_upload: "No files to upload."
+    authentication_token_updated: "Authentication token was successfully updated."
 
   api:
     m400: "400: Bad request."

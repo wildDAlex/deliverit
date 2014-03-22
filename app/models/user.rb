@@ -45,8 +45,8 @@ class User < ActiveRecord::Base
     count
   end
 
-  def ensure_authentication_token
-    if authentication_token.blank?
+  def ensure_authentication_token(regenerate: false)
+    if authentication_token.blank? || regenerate
       self.authentication_token = generate_authentication_token
     end
   end

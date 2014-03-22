@@ -12,7 +12,7 @@ describe Api do
         'Accept' => 'application/json',
         'Content-Type' => 'application/json',
         'HTTP_USER_EMAIL' => @user.email,
-        'HTTP_USER_TOKEN' => @user.authentication_token,
+        'HTTP_USER_TOKEN' => @user.authentication_token
     }
     VALID_REQUEST_HEADERS_FOR_ANOTHER_USER = {
         'Accept' => 'application/json',

@@ -15,6 +15,7 @@ Deliverit::Application.routes.draw do
   match '/download/:version/:filename.:extension' => 'shares#download', :as => :share_version_download, via: [:get]
 
   match '/localupload/' => 'shares#upload_from_local', :as => :upload_from_local, via: [:get]
+  match '/newtoken/' => 'users#generate_token', :as => :generate_token, via: [:put]
   get '/f/:user_id/:original_filename.:extension' => 'shares#show_by_name', constraints: { original_filename: /[^\/]+/ }
 
 
