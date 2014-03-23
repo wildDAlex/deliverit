@@ -250,5 +250,7 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
 
-  config.secret_key = '3c4c2293889ef8d0aa127336egb3c84069ce75f0e127831efc7sfe6f6cbb3ca7f816006ac974623f189d3a292298b9f780a532bd35e52c0fa9135e7d833abljaabcbe7'
+
+  config.secret_key = APP_CONFIG[:local_upload_path]
+
 end
