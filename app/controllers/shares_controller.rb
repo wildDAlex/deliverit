@@ -110,7 +110,7 @@ class SharesController < ApplicationController
         else
           @share.download_count += 1; @share.save  #increase download counter only if downloading full version
           return @share.file
-      end
+        end
       }
       send_file file.call.url, :x_sendfile => true, :filename => @share.original_filename, type: @share.content_type, disposition: "inline"
     else
