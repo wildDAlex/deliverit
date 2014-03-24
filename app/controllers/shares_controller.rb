@@ -97,18 +97,19 @@ class SharesController < ApplicationController
 
   def download
     @share = Share.find_by_file(params[:filename]+'.'+params[:extension])
-    if not @share or (not Share::IMAGE_VERSIONS.include?(params[:version]) and not params[:version].nil?) or (not params[:version].nil? and not @share.image?)
+    if @share.nil? ||
+        ( params[:version] && (not Share::IMAGE_VERSIONS.include?(params[:version])) ) ||
+        ( params[:version] && (not @share.image?) )
       return route_not_found
     end
-    if (@share.user == current_user) or (signed_in? and current_user.admin?) or @share.public
+    if @share.public || ( signed_in? && (@share.user == current_user || current_user.admin?) )
+      if params[:version].nil? || Share::IMAGE_VERSIONS_TO_BE_COUNT.include?(params[:version])
+        @share.download_count += 1; @share.save
+      end
       file = lambda {
-        if params[:version] and @share.image?
-          if Share::IMAGE_VERSIONS_TO_BE_COUNT.include?(params[:version])
-            @share.download_count += 1; @share.save
-          end
-          return @share.file.send(params[:version]) if Share::IMAGE_VERSIONS.include?(params[:version])
+        if params[:version]
+          return @share.file.send(params[:version])
         else
-          @share.download_count += 1; @share.save  #increase download counter only if downloading full version
           return @share.file
         end
       }
