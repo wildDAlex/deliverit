@@ -4,11 +4,17 @@ defaults: &DEFAULTS
 development:
   <<: *DEFAULTS
   local_upload_path: /path/to/local/development/uploads
+  app_secret_key_base: 'secret_key'
+  devise_secret_key: 'secret_key'
 
 test:
   <<: *DEFAULTS
   local_upload_path: /path/to/local/test/uploads
+  app_secret_key_base: 'secret_key'
+  devise_secret_key: 'secret_key'
 
 production:
   <<: *DEFAULTS
   local_upload_path: /path/to/local/production/uploads
+  app_secret_key_base: 'secret_key'
+  devise_secret_key: 'secret_key'

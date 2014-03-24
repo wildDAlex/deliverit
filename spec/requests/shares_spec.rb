@@ -124,6 +124,7 @@ describe Share do
       @user2 = FactoryGirl.create(:valid_user)
       @share = FactoryGirl.create(:share, user: @user, public: false)
       @public_share = FactoryGirl.create(:not_image_share, user: @user, public: true)
+      @public_image = FactoryGirl.create(:share, user: @user, public: true)
     end
 
     describe "non-full version" do
@@ -138,12 +139,21 @@ describe Share do
 
     describe "full version" do
       it "increases counter" do
-        login(@user)
+        login(@user2)
         expect{
-        visit "/download/#{@share.filename}"
-        }.to change{@share.reload.download_count}.from(0).to(1)
+        visit "/download/#{@public_image.filename}"
+        }.to change{@public_image.reload.download_count}.from(0).to(1)
         signing_out
       end
+
+      it "don't increases counter if image belongs to user" do
+        login(@user)
+        expect{
+          visit "/download/#{@public_image.filename}"
+        }.not_to change{@public_image.reload.download_count}
+        signing_out
+      end
+
     end
 
     describe "public shares" do

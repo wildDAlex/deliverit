@@ -104,7 +104,9 @@ class SharesController < ApplicationController
     end
     if @share.public || ( signed_in? && (@share.user == current_user || current_user.admin?) )
       if params[:version].nil? || Share::IMAGE_VERSIONS_TO_BE_COUNT.include?(params[:version])
-        @share.download_count += 1; @share.save
+        unless @share.user == current_user
+          @share.download_count += 1; @share.save
+        end
       end
       file = lambda {
         if params[:version]
