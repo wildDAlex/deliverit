@@ -5,7 +5,7 @@
   '
   .input-append
     /! Rails.env.test verification need because Capybara tests didn't attach file to unvisible file-field
-    = f.file_field :file, :style => "#{"display:none" if not Rails.env.test?}", :onchange => "$('#filename').val($(this).val());"
-    input id="filename" type="text" class="input-xxlarge"  placeholder=t('views.file_placeholder') onclick="$('input[id=share_file]').click();"
-    a.btn class="btn-primary" onclick="$('#new_share').submit ()" =t('links.upload')
+    = f.file_field :file, :style => "#{"display:none" if not Rails.env.test?}"
+    input id="filename" type="text" class="input-xxlarge"  placeholder=t('views.file_placeholder')
+    a.btn class="btn-primary" id="upload_submit" =t('links.upload')
   = f.submit nil, :class => 'btn btn-primary pull-right', :style => "#{"display:none" if not Rails.env.test?}"

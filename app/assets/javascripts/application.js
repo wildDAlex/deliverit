@@ -14,4 +14,18 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
+//= require jquery.turbolinks
 //= require_tree .
+$(function () {
+    $("#share_file").change(function () {
+        $("#filename").val($("#share_file").val());
+    });
+
+    $("#filename").click(function () {
+        $("#share_file").trigger("click");
+    });
+
+    $("#upload_submit").click(function () {
+        $('#new_share').submit();
+    });
+})
