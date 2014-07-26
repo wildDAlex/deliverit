@@ -7,11 +7,10 @@
         img.img-responsive src=download_share_link(share, :thumb)
       div
         = share.short_original_filename(25)
-      div
+      div.thumb-info
         span class="label thumb-prop" = (share.file_size/1024).to_s + t('views.kilobyte')
         = ' * '
         span class="label thumb-prop" =l share.created_at, :format => :short
-        = ' * '
-        span class="label label-info thumb-prop" = share.download_count
+        span class="label label-info thumb-prop counter" = share.download_count
 
 = paginate @shares
