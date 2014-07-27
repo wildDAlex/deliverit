@@ -16,7 +16,7 @@ describe User do
 
   it "creates user upload directory" do
     user = FactoryGirl.create(:valid_user)
-    File.directory?(APP_CONFIG[:local_upload_path]+"/#{user.id}").should be_true
+    File.directory?(Rails.application.secrets.local_upload_path+"/#{user.id}").should be_true
   end
 
   it 'creates authentication_token' do

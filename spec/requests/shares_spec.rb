@@ -108,7 +108,7 @@ describe Share do
 
       it "call file by name uploading files from user local path" do
         require 'fileutils'
-        FileUtils.cp(Rails.root.join('public', 'image_from_local_path.jpg').to_s, APP_CONFIG[:local_upload_path]+"/#{@user.id}/image_from_local_path.jpg")
+        FileUtils.cp(Rails.root.join('public', 'image_from_local_path.jpg').to_s, Rails.application.secrets.local_upload_path+"/#{@user.id}/image_from_local_path.jpg")
         visit "/f/#{@user.id}/image_from_local_path.jpg"
         page.should have_content("image_from_local_path.jpg")
       end

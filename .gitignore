@@ -25,6 +25,7 @@
 .sass-cache
 /config/config.yml
 /config/database.yml
+/config/secrets.yml
 /config/environments/production.rb
 /coverage.data
 /coverage/

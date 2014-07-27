@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   # Uploads files from local path for user
   def upload_from_local_path(public: true)
-    upload_path = APP_CONFIG[:local_upload_path]+"/#{self.id}"
+    upload_path = Rails.application.secrets.local_upload_path+"/#{self.id}"
     Dir.chdir(upload_path)
     count = 0
     Dir.foreach(upload_path) do |file|
@@ -55,9 +55,9 @@ class User < ActiveRecord::Base
 
   # Directory used for automated upload from local server path
   def create_user_directory
-    if APP_CONFIG[:local_upload_path]
+    if Rails.application.secrets.local_upload_path
       require 'fileutils'
-      FileUtils.mkdir_p(APP_CONFIG[:local_upload_path]+"/#{self.id}")
+      FileUtils.mkdir_p(Rails.application.secrets.local_upload_path+"/#{self.id}")
     end
   end
 
