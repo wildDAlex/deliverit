@@ -27,7 +27,7 @@ describe Share do
       end
 
       it "Adds a new share and displays the result" do
-        visit shares_url
+        visit shares_path
         expect{
           attach_file('share[file]', Rails.root.join('public','test_image.jpg'))
           click_button "Create Share"
@@ -76,7 +76,7 @@ describe Share do
       end
 
       it "Show image-share page with links" do
-        visit shares_url
+        visit shares_path
         attach_file('share[file]', Rails.root.join('public','test_image.jpg'))
         click_button "Create Share"
         within(:xpath, "//div[@class='row']/div[@class='span12']") do
@@ -88,7 +88,7 @@ describe Share do
       end
 
       it "Show non-image-share page with links" do
-        visit shares_url
+        visit shares_path
         attach_file('share[file]', Rails.root.join('public','test_file.txt'))
         click_button "Create Share"
         within(:xpath, "//div[@class='row']/div[@class='span12']") do
@@ -158,7 +158,7 @@ describe Share do
 
     describe "public shares" do
       it "allowed for all" do
-        visit share_url(@public_share)
+        visit share_path(@public_share)
         page.should have_content "test_file.txt"
         visit "/f/#{@user.id}/#{@public_share.original_filename}"
         page.should have_content "test_file.txt"
@@ -178,7 +178,7 @@ describe Share do
     describe "private shares" do
       it "allowed for owner" do
         login(@user)
-        visit share_url(@share)
+        visit share_path(@share)
         page.should have_content "test_image.jpg"
         visit "/f/#{@user.id}/#{@share.original_filename}"
         page.should have_content "test_image.jpg"
@@ -188,14 +188,14 @@ describe Share do
       end
       it "not allowed for another user and guest" do
         login(@user2)
-        visit share_url(@share)
+        visit share_path(@share)
         page.should have_content("You are not authorized to access this page.")
         visit "/f/#{@user.id}/#{@share.original_filename}"
         page.should have_content("Forbidden. You don't have permission to access this file.")
         visit "/download/#{@share.filename}"
         page.should have_content("Forbidden. You don't have permission to access this file.")
         signing_out
-        visit share_url(@share)
+        visit share_path(@share)
         page.should_not have_content "test_image.jpg"
         visit "/f/#{@user.id}/#{@share.original_filename}"
         page.should_not have_content "test_image.jpg"

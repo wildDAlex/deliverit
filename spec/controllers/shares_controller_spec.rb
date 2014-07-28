@@ -55,7 +55,7 @@ describe SharesController do
         sign_out @user
         sign_in @user2
         get :show, id: @share
-        response.should redirect_to root_url
+        response.should redirect_to root_path
       end
 
       it "show another user share if public" do
@@ -70,7 +70,7 @@ describe SharesController do
       it "not show if not public" do
         sign_out @user
         get :show, id: @share
-        response.should redirect_to root_url
+        response.should redirect_to root_path
       end
       it "show if public" do
         sign_out @user
@@ -125,9 +125,9 @@ describe SharesController do
         sign_out @user
         sign_in @user2
         put :update, id: @share, share: FactoryGirl.attributes_for(:share)
-        response.should redirect_to root_url
+        response.should redirect_to root_path
         put :update, id: @public_share, share: FactoryGirl.attributes_for(:share)
-        response.should redirect_to root_url
+        response.should redirect_to root_path
       end
 
       it "not changes @shares's attributes" do
@@ -136,12 +136,12 @@ describe SharesController do
         put :update, id: @share, share: FactoryGirl.attributes_for(:share, original_filename: "123.jpg", public: true)
         @share.reload
         @share.original_filename.should eq("test_image.jpg")
-        @share.public.should be_false
+        @share.public.should be_falsey
 
         put :update, id: @public_share, share: FactoryGirl.attributes_for(:share, original_filename: "123.jpg", public: false)
         @public_share.reload
         @public_share.original_filename.should eq("test_image.jpg")
-        @public_share.public.should be_true
+        @public_share.public.should be_truthy
       end
     end
 
@@ -160,12 +160,12 @@ describe SharesController do
         put :update, id: @share, share: FactoryGirl.attributes_for(:share, original_filename: "123.jpg", public: true)
         @share.reload
         @share.original_filename.should eq("test_image.jpg")
-        @share.public.should be_false
+        @share.public.should be_falsey
 
         put :update, id: @public_share, share: FactoryGirl.attributes_for(:share, original_filename: "123.jpg", public: false)
         @public_share.reload
         @public_share.original_filename.should eq("test_image.jpg")
-        @public_share.public.should be_true
+        @public_share.public.should be_truthy
       end
     end
 
@@ -180,7 +180,7 @@ describe SharesController do
 
     it "redirects to shares#index" do
       delete :destroy, id: @share
-      response.should redirect_to shares_url
+      response.should redirect_to shares_path
     end
 
     context "by not owner" do

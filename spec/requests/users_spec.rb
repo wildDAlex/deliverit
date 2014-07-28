@@ -11,7 +11,7 @@ describe "Managing users" do
 
   it "adds a new confirmed user and displays the result" do
     @user2 = FactoryGirl.attributes_for(:valid_user)
-    visit users_url
+    visit users_path
     expect{
       click_link "New"
       fill_in "user[email]", :with => @user2[:email]

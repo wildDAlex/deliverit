@@ -29,7 +29,7 @@ class SharesController < ApplicationController
       @user.upload_from_local_path
       @share = @user.shares.find_by_original_filename(params[:original_filename]+'.'+params[:extension])
       unless @share.public? or (signed_in? and current_user == @share.user) or (signed_in? and current_user.admin?)
-        redirect_to root_url, alert: t('messages.no_access')
+        redirect_to root_path, alert: t('messages.no_access')
       else
         render 'show.html.slim'
       end
@@ -90,7 +90,7 @@ class SharesController < ApplicationController
   def destroy
     @share.destroy
     respond_to do |format|
-      format.html { redirect_to shares_url, alert: t('messages.share_deleted') }
+      format.html { redirect_to shares_path, alert: t('messages.share_deleted') }
       format.json { head :no_content }
     end
   end
@@ -117,7 +117,7 @@ class SharesController < ApplicationController
       }
       send_file file.call.url, :x_sendfile => true, :filename => @share.original_filename, type: @share.content_type, disposition: "inline"
     else
-      redirect_to root_url, alert: t('messages.no_access')
+      redirect_to root_path, alert: t('messages.no_access')
     end
   end
 

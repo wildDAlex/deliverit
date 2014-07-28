@@ -65,7 +65,7 @@ describe Api do
 
         expect(response.status).to eq 204
 
-        expect(Share.last.public).to be_false
+        expect(Share.last.public).to be_falsey
       end
     end
 
@@ -77,7 +77,7 @@ describe Api do
 
         expect(response.status).to eq 201
 
-        expect(Share.last.public).to be_true
+        expect(Share.last.public).to be_truthy
         expect(Share.last.original_filename).to eq 'file_via_post.jpg'
       end
     end

@@ -64,7 +64,7 @@ gem 'kaminari'
 
 gem 'fog'
 
-gem 'rmagick'
+gem 'rmagick', require: false
 
 gem 'rabl'
 #gem 'oj'
