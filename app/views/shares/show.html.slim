@@ -25,7 +25,7 @@ p
     br
     input#focusedInput.span10 type="text" value=html_inline_with_full_link(@share) onclick="this.select();"
 
--if can? :manage, Share
+-if can? :manage, @share
   .form-actions
     = link_to t('.back', :default => t("helpers.links.back")), shares_path, :class => 'btn'
     '

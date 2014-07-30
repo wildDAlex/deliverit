@@ -15,7 +15,7 @@ class Ability
     end
 
     if user.registered?
-      can :manage, Share, :user_id => user.id
+      can :manage, Share, user_id: user.id
       can :create, Share
       can :read, Share, public: true
       can :show_by_name, Share, public: true
