@@ -27,7 +27,7 @@ class SharesController < ApplicationController
     begin
       @user = User.find(params[:user_id])
       @user.upload_from_local_path
-      @share = @user.shares.find_by_original_filename(params[:original_filename]+'.'+params[:extension])
+      @share = @user.shares.find_by_original_filename!(params[:original_filename]+'.'+params[:extension])
       unless @share.public? or (signed_in? and current_user == @share.user) or (signed_in? and current_user.admin?)
         redirect_to root_path, alert: t('messages.no_access')
       else
