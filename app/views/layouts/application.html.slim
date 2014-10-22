@@ -31,6 +31,7 @@ html lang="en"
           - if user_signed_in?
             .container.nav-collapse
               ul.nav
+                li= link_to t('links.all_files'), "/shares"
                 li= link_to t('links.images'), "/content-type/images"
               ul.nav.pull-right
                 li.dropdown

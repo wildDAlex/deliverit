@@ -7,7 +7,7 @@ Deliverit::Application.routes.draw do
 
   resources :shares
 
-  root :to => "shares#index"
+  root :to => "shares#index", :type => 'images'
 
   match '/content-type/:type' => 'shares#index', via: [:get]
 

@@ -40,6 +40,7 @@ en:
     html_inline_with_full_link: "HTML inline with link to full version"
     sign_out: "Sign out"
     upload: "Upload"
+    all_files: "All Files"
     images: "Images"
     edit_account_settings: "Edit account settings"
     manage_users: "Manage users"
