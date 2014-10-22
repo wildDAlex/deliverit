@@ -34,6 +34,8 @@ line in `app/uploaders/file_uploader.rb`. This line collect directory structure 
 
 Also you need to set up `config.action_mailer.smtp_settings` in `environments/production.rb` file.
 
+Then go to `config/secrets.yml` and set keys and paths to your own.
+
 And last thing is `rake:db:migrate`.
 
 That's it for quick start! DeliverIt ready to run.
@@ -56,6 +58,14 @@ Image handling provided by CarrierWave gem, so for more information see - https:
 
 Also you may want to customize or fully redesign application view.
 DeliverIt based on Twitter bootstrap. For that css-framework available dozens of themes - go ahead and play with it.
+
+## Tips&Tricks
+
+* To filter files by type you may go to '/content-type/{content_type}'. For ex. '/content-type/pdf'.
+* You can automate adding files by uploading them via Ftp. Just set up `local_upload_path` variable in `config/secrets.yml` and use `Upload files from local server path` from menu.
+* Automatiс upload screenshots by Monosnap:
+
+![Monosnap](https://leto41d.storage.yandex.net/rdisk/4ac5109c77c374c8d20922d6253c4875/mpfs/W3S4AyN_yajZ_Jvfl7XJIyBo7qBxjmZzju68YsHxtd-Xn_I8N48Ll2ZSoqaTq2_uwx2PoRD0etM1hOo9OCItVQ==?uid=0&filename=Screenshot_on_2014-10-22_at_18_20_29.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&rtoken=32380fee034cb976949d02f85881fda7&rtimestamp=5447c45c&force_default=no)
 
 ## Copyright
 
