@@ -41,7 +41,7 @@ GEM
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
     builder (3.2.2)
-    cancan (1.6.10)
+    cancancan (1.9.2)
     capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
@@ -307,7 +307,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cancan
+  cancancan (~> 1.9)
   capistrano (~> 2.15.5)
   capybara
   carrierwave

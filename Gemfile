@@ -56,7 +56,7 @@ gem 'slim-rails', '~> 2.1.5'
 
 gem 'devise'
 
-gem 'cancan'
+gem 'cancancan', '~> 1.9'
 
 gem 'carrierwave'
 
