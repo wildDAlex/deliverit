@@ -18,6 +18,7 @@ Deliverit::Application.routes.draw do
   match '/newtoken/' => 'users#generate_token', :as => :generate_token, via: [:put]
   get '/f/:user_id/:original_filename.:extension' => 'shares#show_by_name', constraints: { original_filename: /[^\/]+/ }
 
+  get 'tags/:tag', to: 'shares#index', as: :tag
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do

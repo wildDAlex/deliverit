@@ -2,6 +2,12 @@
 div class="page-header"
   strong==t '.title', :default => @share.original_filename
 p
+  = raw @share.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ')
+p
+  = form_for @share, :html => { :multipart => true } do |f|
+    = f.text_field :tag_list
+    = f.submit nil
+p
   = html_link_to_share(@share)
 p
   strong= t("links.link") + ':'

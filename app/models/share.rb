@@ -2,11 +2,14 @@ class Share < ActiveRecord::Base
 
   mount_uploader :file, FileUploader
   before_save :update_file_attributes
+  before_save :set_automatic_tags
 
   IMAGE_VERSIONS = ['thumb', 'medium']
   IMAGE_VERSIONS_TO_BE_COUNT = ['medium'] # except full version that count by default
 
   belongs_to :user
+  has_many :taggings
+  has_many :tags, through: :taggings
 
   validates :file, :original_filename, presence: true
   validates :user, presence: true
@@ -41,6 +44,34 @@ class Share < ActiveRecord::Base
   #def self.type(shares, type)
   #  shares.where("content_type LIKE ?", "%#{type}%")
   #end
+
+  def self.tagged_with(name, user)
+    # Tag.find_by_name!(name).shares
+    Tag.where(name: name, user_id: user.id).first.shares
+  end
+
+  def self.tag_counts
+    Tag.select("tags.*, count(taggings.tag_id) as count").
+        joins(:taggings).group("taggings.tag_id")
+  end
+
+  def tag_list
+    tags.map(&:name).join(", ")
+  end
+
+  def tag_list=(names)
+    if names.empty?
+      self.tags.clear
+      return
+    end
+
+    tags = names.split(",").uniq.map do |n|
+      Tag.where(name: n.strip, user: self.user).first_or_create! unless n.strip.empty?
+    end
+    self.tags = tags.compact.uniq
+
+  end
+
 
   def file_icon_class
     case self.content_type
@@ -1429,6 +1460,15 @@ class Share < ActiveRecord::Base
     if file.present? && file_changed?
       self.content_type = file.file.content_type
       self.file_size = file.file.size
+    end
+  end
+
+  def set_automatic_tags
+    if self.image? and not self.tags.include?(Tag.where(name: "images", user: self.user).first_or_create!)
+      self.tags << Tag.where(name: "images", user: self.user).first
+    end
+    if self.original_filename.downcase.include?("screenshot_") and not self.tags.include?(Tag.where(name: "screenshot", user: self.user).first_or_create!)
+      self.tags << Tag.where(name: "screenshot", user: self.user).first
     end
   end
 

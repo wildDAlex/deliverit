@@ -10,6 +10,11 @@ class SharesController < ApplicationController
     if params[:type] == 'images'
       @shares = Share.where(user_id: current_user.id).where("content_type LIKE '%image%' and content_type NOT LIKE '%tiff%'").order("created_at desc").page params[:page]
       render 'thumb.html.slim'
+    elsif params[:tag]
+      @shares = Share.tagged_with(params[:tag], current_user).where(user_id: current_user.id).where("content_type LIKE ?", "%#{params[:type]}%").order("created_at desc").page params[:page]
+      if params[:type] == 'images'
+        @shares = @shares.where("content_type LIKE '%image%' and content_type NOT LIKE '%tiff%'")
+      end
     else
       #@shares = Share.where(user_id: current_user.id).type(@shares, params[:type]).order("created_at desc").page params[:page]
       @shares = Share.where(user_id: current_user.id).where("content_type LIKE ?", "%#{params[:type]}%").order("created_at desc").page params[:page]
@@ -149,7 +154,7 @@ class SharesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def share_params
       if params[:share]   # if params[:share] fix the case when user click update button without selecting new file
-        params.require(:share).permit(:file, :original_filename, :public)
+        params.require(:share).permit(:file, :original_filename, :public, :tag_list)
       end
     end
 end
