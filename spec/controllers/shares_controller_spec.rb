@@ -88,18 +88,25 @@ describe SharesController do
           Share.create(file: @share.file, user: @user, public: false)
         }.to change(Share, :count).by(1)
       end
+
+      it "creates image share with images-tag" do
+        expect(@share.tags.first.name).to eq("images")
+      end
+
+      it "creates tag unique to current user" do
+        @anothers_tag = FactoryGirl.create(:tag_one, user: @user2)
+        @share.tag_list = "TagOne"
+        expect(@user.tags.last.name).to eq(@anothers_tag.name)
+        expect(@user.tags.last).not_to eq(@anothers_tag)
+      end
+
+      it "does not dublicate existing tag" do
+        @tag = FactoryGirl.create(:tag_one, user: @user)
+        @share.tag_list = "TagOne"
+        expect(@share.tags.last).to eq(@tag)
+      end
     end
   end
-
-  #describe "POST create" do
-  #  context "with valid attributes" do
-  #    it "creates a new share" do
-  #      expect{
-  #        post :create, share: FactoryGirl.attributes_for(:share)
-  #      }.to change(Share, :count).by(1)
-  #    end
-  #  end
-  #end
 
   describe 'PUT update' do
     context "valid attributes" do
@@ -112,6 +119,15 @@ describe SharesController do
         put :update, id: @share, share: FactoryGirl.attributes_for(:share, original_filename: "123.jpg")
         @share.reload
         @share.original_filename.should eq("123.jpg")
+      end
+
+      it "changes @shares's tags" do
+        @tag_one = FactoryGirl.create(:tag_one, user: @user)
+        @tag_two = FactoryGirl.create(:tag_two, user: @user)
+
+        put :update, id: @share, share: FactoryGirl.attributes_for(:share, tag_list: "TagOne, TagTwo")
+        @share.reload
+        expect(@share.tags).to include(@tag_one, @tag_two)
       end
 
       it "redirects to the updated share" do

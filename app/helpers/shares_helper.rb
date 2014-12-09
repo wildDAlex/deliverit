@@ -34,7 +34,7 @@ module SharesHelper
 
   def tag_list(share)
     if share.user == current_user
-      raw share.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ')
+      raw share.tags.map(&:name).map { |t| share.image? ? (link_to t, tag_path(t)+'?type=images') : (link_to t, tag_path(t)) }.join(', ')
     end
   end
 

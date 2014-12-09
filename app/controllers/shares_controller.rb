@@ -11,7 +11,7 @@ class SharesController < ApplicationController
       @shares = Share.where(user_id: current_user.id).where("content_type LIKE '%image%' and content_type NOT LIKE '%tiff%'").order("created_at desc").page params[:page]
       render 'thumb.html.slim'
     elsif params[:tag]
-      @shares = Share.tagged_with(params[:tag], current_user).where(user_id: current_user.id).where("content_type LIKE ?", "%#{params[:type]}%").order("created_at desc").page params[:page]
+      @shares = Share.tagged_with(params[:tag], current_user).where(user_id: current_user.id).order("created_at desc").page params[:page]
       if params[:type] == 'images'
         @shares = @shares.where("content_type LIKE '%image%' and content_type NOT LIKE '%tiff%'")
       end

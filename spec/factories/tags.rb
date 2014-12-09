@@ -1,8 +1,10 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :tag do
-    name "MyString"
-    user nil
+  factory :tag_one, :class => Tag do |f|
+    f.name "TagOne"
+  end
+
+  factory :tag_two, :class => Tag do |f|
+    f.name "TagTwo"
   end
 end
