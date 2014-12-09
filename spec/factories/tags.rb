@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :tag do
     name "MyString"
-#    user nil
+    user nil
   end
 end

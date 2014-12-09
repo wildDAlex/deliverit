@@ -4,6 +4,5 @@ FactoryGirl.define do
   factory :tagging do
     tag nil
     share nil
-    user nil
   end
 end

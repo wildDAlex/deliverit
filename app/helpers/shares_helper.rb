@@ -32,4 +32,10 @@ module SharesHelper
     end
   end
 
+  def tag_list(share)
+    if share.user == current_user
+      raw share.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ')
+    end
+  end
+
 end

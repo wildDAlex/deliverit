@@ -8,5 +8,4 @@
     = f.file_field :file, :style => "#{"display:none" if not Rails.env.test?}"
     input id="filename" type="text" class="input-xxlarge"  placeholder=t('views.file_placeholder')
     a.btn class="btn-primary" id="upload_submit" =t('links.upload')
-    = f.text_field :tag_list
   = f.submit nil, :class => 'btn btn-primary pull-right', :style => "#{"display:none" if not Rails.env.test?}"
