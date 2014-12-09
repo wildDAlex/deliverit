@@ -7,17 +7,21 @@ class SharesController < ApplicationController
   # GET /shares
   # GET /shares.json
   def index
-    if params[:type] == 'images'
-      @shares = Share.where(user_id: current_user.id).where("content_type LIKE '%image%' and content_type NOT LIKE '%tiff%'").order("created_at desc").page params[:page]
-      render 'thumb.html.slim'
-    elsif params[:tag]
-      @shares = Share.tagged_with(params[:tag], current_user).where(user_id: current_user.id).order("created_at desc").page params[:page]
-      if params[:type] == 'images'
-        @shares = @shares.where("content_type LIKE '%image%' and content_type NOT LIKE '%tiff%'")
+    begin
+      @shares = Share.owned_by(current_user)
+      if params[:tag]
+        @shares = @shares.tagged_with(params[:tag], current_user)
       end
-    else
-      #@shares = Share.where(user_id: current_user.id).type(@shares, params[:type]).order("created_at desc").page params[:page]
-      @shares = Share.where(user_id: current_user.id).where("content_type LIKE ?", "%#{params[:type]}%").order("created_at desc").page params[:page]
+      if params[:type] and params[:type] != 'images'
+        @shares = @shares.where("content_type LIKE ?", "%#{params[:type]}%")
+      end
+      @shares = @shares.order("created_at desc").page params[:page] if @shares
+      if params[:type] == 'images'
+        @shares = @shares.images.order("created_at desc").page params[:page]
+        render 'thumb.html.slim'
+      end
+    rescue ActiveRecord::RecordNotFound
+      return route_not_found
     end
   end
 

@@ -14,6 +14,10 @@ class Share < ActiveRecord::Base
   validates :file, :original_filename, presence: true
   validates :user, presence: true
 
+  scope :images, -> { where("content_type LIKE '%image%' and content_type NOT LIKE '%tiff%'") }
+  scope :tagged_with, ->(name, user) { Tag.owned_by(user).find_by_name!(name).shares }
+  scope :owned_by, ->(user) { where(user_id: user.id) }
+
   # Deletes file with share
   before_destroy do
     remove_file!
@@ -38,16 +42,6 @@ class Share < ActiveRecord::Base
 
   def turn_publicity
     self.public ? false : true
-  end
-
-  # Filter by content type
-  #def self.type(shares, type)
-  #  shares.where("content_type LIKE ?", "%#{type}%")
-  #end
-
-  def self.tagged_with(name, user)
-    # Tag.find_by_name!(name).shares
-    Tag.where(name: name, user_id: user.id).first.shares
   end
 
   def self.tag_counts
