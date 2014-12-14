@@ -65,7 +65,7 @@ DeliverIt based on Twitter bootstrap. For that css-framework available dozens of
 * You can automate adding files by uploading them via Ftp. Just set up `local_upload_path` variable in `config/secrets.yml` and use `Upload files from local server path` from menu.
 * Automatiс upload screenshots by [Monosnap](http://monosnap.com):
 
-![Monosnap](https://leto41d.storage.yandex.net/rdisk/4ac5109c77c374c8d20922d6253c4875/mpfs/W3S4AyN_yajZ_Jvfl7XJIyBo7qBxjmZzju68YsHxtd-Xn_I8N48Ll2ZSoqaTq2_uwx2PoRD0etM1hOo9OCItVQ==?uid=0&filename=Screenshot_on_2014-10-22_at_18_20_29.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&rtoken=32380fee034cb976949d02f85881fda7&rtimestamp=5447c45c&force_default=no)
+![Monosnap](https://dl.dropboxusercontent.com/u/11730932/shared%20images/Screenshot_on_2014-10-22_at_18_20_29.png)
 
 ## Copyright
 
