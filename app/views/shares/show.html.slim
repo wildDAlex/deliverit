@@ -2,10 +2,8 @@
 div class="page-header"
   strong==t '.title', :default => @share.original_filename
 p
-  = tag_list(@share)
-  = form_for @share, :html => { :multipart => true } do |f|
-    = f.text_field :tag_list
-    = f.submit nil
+  = form_for @share, :html => { :multipart => true }, remote: true do |f|
+    = f.text_field :tag_list, "data-role"=>"tagsinput",  "data-share-form-id"=>"edit_share_#{@share.id}"
 p
   = html_link_to_share(@share)
 p
@@ -37,3 +35,7 @@ p
     = link_to (@share.public ? t('buttons.make_private') : t('buttons.make_public')), share_path(@share, share: {public: @share.turn_publicity }),  :method => :put, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-inverse'
     '
     = link_to t('.destroy', :default => t("helpers.links.destroy")), share_path(@share), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+
+javascript:
+  $(document).ready(function () {
+  });
