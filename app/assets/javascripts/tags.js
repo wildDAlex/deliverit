@@ -8,6 +8,7 @@ $(document).ready(function () {
     var elem = $('input#share_tag_list');
     var form_id = elem.data('share-form-id');
 
+
     $('input#share_tag_list').on('itemAdded', function(event) {
         $('form#'+form_id).trigger('submit.rails');
     });
@@ -17,7 +18,9 @@ $(document).ready(function () {
     });
 
     $('input#share_tag_list').tagsinput({
-        tagClass: 'alert alert-block'
+        trimValue: true,
+        tagClass: 'label label-warning'
     });
+
 });
 
