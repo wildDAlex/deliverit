@@ -15,6 +15,7 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require jquery.turbolinks
+//= require tags
 //= require_tree .
 $(function () {
     $("#share_file").change(function () {
@@ -28,4 +29,4 @@ $(function () {
     $("#upload_submit").click(function () {
         $('#new_share').submit();
     });
-})
+});

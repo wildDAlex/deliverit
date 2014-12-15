@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
 
   has_many :shares, dependent: :destroy
+  has_many :tags, dependent: :destroy
 
   before_save :ensure_authentication_token
 

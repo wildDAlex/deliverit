@@ -32,4 +32,14 @@ module SharesHelper
     end
   end
 
+  def tag_list(share)
+    if share.user == current_user
+      raw share.tags.map(&:name).map { |t| share.image? ? (link_to t, tag_path(t)+'?type=images') : (link_to t, tag_path(t)) }.join(', ')
+    end
+  end
+
+  def tag_url_opt(share)
+    share.image? ? "/?type=images" : ""
+  end
+
 end

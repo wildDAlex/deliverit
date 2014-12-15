@@ -2,4 +2,5 @@
 *= require bootstrap_and_overrides
 *= require shares-list
 *= require thumbnail-gallery
+*= require bootstrap-tagsinput
 */
