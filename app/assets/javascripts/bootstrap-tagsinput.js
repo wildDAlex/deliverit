@@ -124,7 +124,8 @@
       self.itemsArray.push(item);
 
       // add a tag element
-      var $tag = $('<span class="tag ' + htmlEncode(tagClass) + '">' + '<a href="/tags/'+ htmlEncode(itemText) + '">' + htmlEncode(itemText) + '</a>' + '<span data-role="remove"></span></span>');
+      var url_opt = $('input#share_tag_list').data('share-content-type');
+      var $tag = $('<span class="tag ' + htmlEncode(tagClass) + '">' + '<a href="/tags/'+ htmlEncode(itemText) + url_opt + '">' + htmlEncode(itemText) + '</a>' + '<span data-role="remove"></span></span>');
 
       $tag.data('item', item);
       self.findInputWrapper().before($tag);

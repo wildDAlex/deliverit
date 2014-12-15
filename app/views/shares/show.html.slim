@@ -3,7 +3,7 @@ div class="page-header"
   strong==t '.title', :default => @share.original_filename
 p
   = form_for @share, :html => { :multipart => true }, remote: true do |f|
-    = f.text_field :tag_list, "data-role"=>"tagsinput",  "data-share-form-id"=>"edit_share_#{@share.id}"
+    = f.text_field :tag_list, "data-role"=>"tagsinput", "data-share-content-type"=>tag_url_opt(@share),  "data-share-form-id"=>"edit_share_#{@share.id}"
 p
   = html_link_to_share(@share)
 p

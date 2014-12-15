@@ -38,4 +38,8 @@ module SharesHelper
     end
   end
 
+  def tag_url_opt(share)
+    share.image? ? "/?type=images" : ""
+  end
+
 end
