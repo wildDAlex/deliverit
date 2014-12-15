@@ -123,8 +123,8 @@ describe Share do
       @user = FactoryGirl.create(:valid_user)
       @user2 = FactoryGirl.create(:valid_user)
       @share = FactoryGirl.create(:share, user: @user, public: false)
-      @public_share = FactoryGirl.create(:not_image_share, user: @user, public: true)
-      @public_image = FactoryGirl.create(:share, user: @user, public: true)
+      @public_share = FactoryGirl.create(:not_image_share, user: @user, public: true, tag_list: "TagThree")
+      @public_image = FactoryGirl.create(:share, user: @user, public: true, tag_list: "TagOne, TagTwo")
     end
 
     describe "non-full version" do
@@ -203,14 +203,30 @@ describe Share do
         page.should have_content("You need to sign in or sign up before continuing.")
       end
     end
+
+    describe  "share with tags" do
+      it "show own tags" do
+        login(@user)
+        visit share_path(@public_image)
+        expect(page).to have_selector("input[value='images, TagOne, TagTwo']")
+        signing_out
+      end
+      it "doesn't show anothers tags" do
+        @share_with_tags = FactoryGirl.create(:share, user: @user, public: true, tag_list: "TagOne, TagTwo")
+        login(@user2)
+        visit share_path(@public_image)
+        expect(page).not_to have_selector("input[value='images, TagOne, TagTwo']")
+        signing_out
+      end
+    end
   end
 
   context "filter" do
     before :each do
       DatabaseCleaner.clean
       @user = FactoryGirl.create(:valid_user)
-      @img_share = FactoryGirl.create(:share, user: @user)
-      @txt_share = FactoryGirl.create(:not_image_share, user: @user)
+      @img_share = FactoryGirl.create(:share, user: @user, tag_list: "TagOne")
+      @txt_share = FactoryGirl.create(:not_image_share, user: @user, tag_list: "TagTwo")
     end
     describe "by content-type" do
       it "returns only filtering shares" do
@@ -224,6 +240,15 @@ describe Share do
         visit "/content-type/text"
         page.should_not have_content "test_image.jpg"
         page.should have_content "test_file.txt"
+      end
+    end
+    describe  "by tag" do
+      it "returns only shares with specified tag" do
+        login(@user)
+        tag = Tag.owned_by(@user).find_by_name("TagOne")
+        visit share_path(tag)
+        page.should have_content "test_image.jpg"
+        page.should_not have_content "test_file.txt"
       end
     end
   end
