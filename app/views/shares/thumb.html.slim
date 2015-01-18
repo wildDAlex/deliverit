@@ -12,5 +12,6 @@
         = ' * '
         span class="label thumb-prop" =l share.created_at, :format => :short
         span class="label label-info thumb-prop counter" = share.download_count
-
+        - unless share.public?
+          span class="private" = image_tag "private.png"
 = paginate @shares

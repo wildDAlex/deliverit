@@ -38,6 +38,12 @@
     top: 10px;
 }
 
+.private {
+    position: absolute;
+    right: 1px;
+    top: 1px;
+}
+
 .col-xs-1,
 .col-xs-2,
 .col-xs-3,

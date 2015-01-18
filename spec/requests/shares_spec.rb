@@ -125,6 +125,7 @@ describe Share do
       @share = FactoryGirl.create(:share, user: @user, public: false)
       @public_share = FactoryGirl.create(:not_image_share, user: @user, public: true, tag_list: "TagThree")
       @public_image = FactoryGirl.create(:share, user: @user, public: true, tag_list: "TagOne, TagTwo")
+      @private_image = FactoryGirl.create(:share, user: @user, public: false, tag_list: "TagOne, TagThree")
     end
 
     describe "non-full version" do
@@ -201,6 +202,13 @@ describe Share do
         page.should_not have_content "test_image.jpg"
         visit "/download/#{@share.filename}"
         page.should have_content("You need to sign in or sign up before continuing.")
+      end
+      it "marked by Private icon in thumb list" do
+        login(@user)
+        @public_share.destroy!
+        @public_image.destroy!
+        visit '/content-type/images'
+        expect(page).to have_selector("div[class='thumb-info']>span[class='private']")
       end
     end
 
