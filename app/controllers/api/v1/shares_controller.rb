@@ -69,7 +69,7 @@ module Api
       def share_params
         begin
           if params[:share]   # if params[:share] fix the case when user click update button without selecting new file
-            params.require(:share).permit(:original_filename, :public, :file)
+            params.require(:share).permit(:original_filename, :public, :file, :tag_list)
           end
         rescue ActionController::UnpermittedParameters => e # only if action_on_unpermitted_parameters = :raise
           render text: { status: 400, error: e.message }.to_json, :status => 400
