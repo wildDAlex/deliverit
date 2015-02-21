@@ -1,6 +1,7 @@
 .filetype {
     background-repeat: no-repeat;
     background-position: center;
+    background-image:url(_blank.png);
 }
 
 .png {
@@ -11,27 +12,35 @@
     background-image:url(jpg.png);
 }
 
+.jpeg {
+    background-image:url(jpg.png);
+}
+
 .gif {
     background-image:url(gif.png);
 }
 
-.rar {
+.x-rar-compressed, .x-rar {
     background-image:url(rar.png);
 }
 
-.aac {
+.pdf {
+    background-image:url(pdf.png);
+}
+
+.aac, .x-aac {
     background-image:url(aac.png);
 }
 
-.ai {
+.postscript {
     background-image:url(ai.png);
 }
 
-.aiff {
+.x-aiff {
     background-image:url(aiff.png);
 }
 
-.avi {
+.x-msvideo {
     background-image:url(avi.png);
 }
 
@@ -55,19 +64,19 @@
     background-image:url(dmg.png);
 }
 
-.doc {
+.msword, .vnd_openxmlformats-officedocument_wordprocessingml_document {
     background-image:url(doc.png);
 }
 
-.dotx {
+.vnd_openxmlformats-officedocument_wordprocessingml_template {
     background-image:url(dotx.png);
 }
 
-.dwg {
+.vnd_dwg {
     background-image:url(dwg.png);
 }
 
-.dxf {
+.vnd_dxf {
     background-image:url(dxf.png);
 }
 
@@ -75,11 +84,11 @@
     background-image:url(eps.png);
 }
 
-.bin {
+.octet-stream {
     background-image:url(exe.png);
 }
 
-.flv {
+.x-flv {
     background-image:url(flv.png);
 }
 
@@ -87,7 +96,7 @@
     background-image:url(gif.png);
 }
 
-.c {
+.x-c {
     background-image:url(c.png);
 }
 
@@ -119,7 +128,7 @@
     background-image:url(key.png);
 }
 
-.mid {
+.midi {
     background-image:url(mid.png);
 }
 
@@ -131,7 +140,7 @@
     background-image:url(mp4.png);
 }
 
-.mpga {
+.mpeg {
     background-image:url(mp3.png);
 }
 
@@ -139,43 +148,39 @@
     background-image:url(mpg.png);
 }
 
-.odf {
+.vnd_oasi_opendocument_formula {
     background-image:url(odf.png);
 }
 
-.ods {
+.vnd_oasis_opendocument_spreadsheet {
     background-image:url(ods.png);
 }
 
-.odt {
+.vnd_oasis_opendocument_text {
     background-image:url(odt.png);
 }
 
-.otp {
+.vnd_oasis_opendocument_presentation-template {
     background-image:url(otp.png);
 }
 
-.ots {
+.vnd_oasis_opendocument_spreadsheet-template {
     background-image:url(ots.png);
 }
 
-.ott {
+.vnd_oasis_opendocument_text-template {
     background-image:url(ott.png);
-}
-
-.pdf {
-    background-image:url(pdf.png);
 }
 
 .php {
     background-image:url(php.png);
 }
 
-.ppt {
+.vnd_ms-powerpoint, .vnd_openxmlformats-officedocument_presentationml_presentation {
     background-image:url(ppt.png);
 }
 
-.psd {
+.vnd_adobe_photoshop, .x-photoshop {
     background-image:url(psd.png);
 }
 
@@ -183,7 +188,7 @@
     background-image:url(py.png);
 }
 
-.qt {
+.quicktime {
     background-image:url(qt.png);
 }
 
@@ -215,19 +220,19 @@
     background-image:url(tiff.png);
 }
 
-.txt {
+.txt, .plain {
     background-image:url(txt.png);
 }
 
-.wav {
+.wav, .x-wav {
     background-image:url(wav.png);
 }
 
-.xls {
+.xls, .vnd_ms-excel {
     background-image:url(xls.png);
 }
 
-.xlsx {
+.vnd_openxmlformats-officedocument_spreadsheetml_sheet {
     background-image:url(xlsx.png);
 }
 
@@ -241,8 +246,4 @@
 
 .zip {
     background-image:url(zip.png);
-}
-
-.file-blank {
-    background-image:url(_blank.png);
 }
