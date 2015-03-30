@@ -27,6 +27,10 @@ module SharesHelper
   def html_link_to_share(share)
     if share.image?
       link_to (image_tag download_share_link(share, :medium)), download_share_link(share), target: :_blank
+    elsif share.content_type.start_with?('video')
+      "<video controls='controls' autoplay='autoplay' loop='loop'>
+<source src='#{download_share_link(share)}' type='#{share.content_type}' />
+</video>"
     else
       link_to share.short_original_filename, download_share_link(share), target: :_blank
     end
