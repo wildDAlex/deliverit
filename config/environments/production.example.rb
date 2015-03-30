@@ -1,9 +1,6 @@
 Deliverit::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
-  config.middleware.insert 0, Rack::Sendfile, config.action_dispatch.x_sendfile_header
-
   # Code is not reloaded between requests.
   config.cache_classes = true
 
