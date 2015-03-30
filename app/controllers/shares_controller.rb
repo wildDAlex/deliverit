@@ -135,10 +135,10 @@ class SharesController < ApplicationController
         response.header["Content-Range"] = "bytes #{bytes.begin}-#{bytes.end}/#{size}"
 
         send_data IO.binread(file.call.url,length, offset), :type => "video/webm", :stream => true,  :disposition => 'inline',
-                  :file_name => @share.original_filename, buffer_size: 4096
+                  :file_name => @share.original_filename, buffer_size: 4096, status: "206 Partial Content"
 
       else
-        send_file file.call.url, :x_sendfile => true, :filename => @share.original_filename, type: @share.content_type, disposition: "inline", stream: true, buffer_size: 4096
+        send_file file.call.url, :x_sendfile => true, :filename => @share.original_filename, type: @share.content_type, disposition: "inline"
       end
     else
       redirect_to root_path, alert: t('messages.no_access')
