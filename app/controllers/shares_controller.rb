@@ -124,7 +124,7 @@ class SharesController < ApplicationController
           return @share.file
         end
       }
-      if(request.headers["HTTP_RANGE"]) && Rails.env.development?
+      if(request.headers["HTTP_RANGE"])
 
         size = File.size(file.call.url)
         bytes = Rack::Utils.byte_ranges(request.headers, size)[0]
