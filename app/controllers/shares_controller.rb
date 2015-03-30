@@ -124,7 +124,7 @@ class SharesController < ApplicationController
           return @share.file
         end
       }
-      send_file file.call.url, :x_sendfile => true, :filename => @share.original_filename, type: @share.content_type, disposition: "inline"
+      send_file file.call.url, :x_sendfile => true, :filename => @share.original_filename, type: @share.content_type, disposition: "inline", stream: true, buffer_size: 4096
     else
       redirect_to root_path, alert: t('messages.no_access')
     end
