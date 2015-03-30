@@ -124,7 +124,22 @@ class SharesController < ApplicationController
           return @share.file
         end
       }
-      send_file file.call.url, :x_sendfile => true, :filename => @share.original_filename, type: @share.content_type, disposition: "inline", stream: true, buffer_size: 4096
+      if(request.headers["HTTP_RANGE"]) && Rails.env.development?
+
+        size = File.size(file.call.url)
+        bytes = Rack::Utils.byte_ranges(request.headers, size)[0]
+        offset = bytes.begin
+        length = bytes.end  - bytes.begin
+
+        response.header["Accept-Ranges"]=  "bytes"
+        response.header["Content-Range"] = "bytes #{bytes.begin}-#{bytes.end}/#{size}"
+
+        send_data IO.binread(file.call.url,length, offset), :type => "video/webm", :stream => true,  :disposition => 'inline',
+                  :file_name => @share.original_filename, buffer_size: 4096
+
+      else
+        send_file file.call.url, :x_sendfile => true, :filename => @share.original_filename, type: @share.content_type, disposition: "inline", stream: true, buffer_size: 4096
+      end
     else
       redirect_to root_path, alert: t('messages.no_access')
     end
